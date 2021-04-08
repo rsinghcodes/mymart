@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   root: {
     overflow: "hidden",
-    width: "20rem",
+    width: "14rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",

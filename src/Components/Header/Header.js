@@ -11,13 +11,16 @@ import {
   Link,
   List,
   ListItem,
-  // ListItemText,
+  ListItemIcon,
+  ListItemText,
   ListSubheader,
   SwipeableDrawer,
-  Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import logo from "../../logo.png";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import AccountBoxIcon from "@material-ui/icons/AccountBox";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -26,13 +29,22 @@ const Header = () => {
     <>
       <AppBar className={classes.root}>
         <Toolbar>
-          <Link href="#" underline="none">
-            <Typography color="textPrimary">
-              <span style={{ fontWeight: "bold", fontSize: "1.5rem" }}>
-                Buck
-              </span>
-              Store
-            </Typography>
+          <Link
+            href="/"
+            underline="none"
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <img src={logo} alt="logo" style={{ width: "1.4rem" }} />
+            <span
+              style={{
+                fontSize: "1.4rem",
+                marginLeft: "0.5rem",
+                color: "#001833",
+                fontWeight: "bold",
+              }}
+            >
+              buckstore
+            </span>
           </Link>
           <div className={classes.grow} />
           <IconButton
@@ -57,13 +69,30 @@ const Header = () => {
               }
             >
               <ListItem button>
-                <Button text="Cart Items" size="small" />
+                <ListItem button>
+                  <ListItemIcon>
+                    <Badge badgeContent={10} color="secondary">
+                      <ShoppingCartIcon style={{ color: "#001833" }} />
+                    </Badge>
+                  </ListItemIcon>
+                  <ListItemText primary="Cart Items" />
+                </ListItem>
               </ListItem>
               <ListItem button>
-                <Button text="Login" size="small" />
+                <ListItem button>
+                  <ListItemIcon>
+                    <ExitToAppIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Login" />
+                </ListItem>
               </ListItem>
               <ListItem button>
-                <Button text="Sign-up" size="small" />
+                <ListItem button>
+                  <ListItemIcon>
+                    <AccountBoxIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Sign-up" />
+                </ListItem>
               </ListItem>
             </List>
           </SwipeableDrawer>

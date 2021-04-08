@@ -1,13 +1,12 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { Container, CssBaseline } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import Header from "./Components/Header/Header";
 import Products from "./Components/Products/Products";
-import Banner from "./Components/Banner/Banner";
 // import { makeStyles } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ["Sora", "Roboto"].join(","),
+    fontFamily: ["Sora"].join(","),
   },
   palette: {
     primary: {
@@ -51,17 +50,18 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header />
-        <Banner />
-        <Container
-          maxWidth="lg"
-          disableGutters={true}
-          style={{ display: "flex", flexWrap: "wrap" }}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+            marginTop: "4rem",
+          }}
         >
           {products.map((product) => {
             return <Products key={product.id} product={product} />;
           })}
-        </Container>
-
+        </div>
         <CssBaseline />
       </ThemeProvider>
     </>
