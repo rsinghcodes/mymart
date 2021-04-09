@@ -3,19 +3,22 @@ import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
   root: {
     background: "#f5faff",
+    color: "#001833",
   },
   grow: {
     flexGrow: 1,
   },
-  navBox: {
+  label: {
+    textTransform: "none",
+  },
+  sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
   },
-  menuButton: {
-    color: "#000",
-    display: "inline-block",
+  sectionMobile: {
+    display: "flex",
     [theme.breakpoints.up("md")]: {
       display: "none",
     },

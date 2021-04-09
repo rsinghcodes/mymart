@@ -1,12 +1,13 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
+import { Box, CssBaseline } from "@material-ui/core";
 import Header from "./Components/Header/Header";
-import Products from "./Components/Products/Products";
+// import Products from "./Components/Products/Products";
+import Category from "./Components/Category/Category";
 // import { makeStyles } from "@material-ui/core/styles";
 
 const theme = createMuiTheme({
   typography: {
-    fontFamily: ["Sora"].join(","),
+    fontFamily: ["Rubik"].join(","),
   },
   palette: {
     primary: {
@@ -24,44 +25,24 @@ const theme = createMuiTheme({
   },
 });
 
-const products = [
-  {
-    id: 1,
-    name: "Tide Plus Jasmine & Rose Detergent",
-    mrp: 50,
-    saveOffer: 5,
-    sellingPrice: 45,
-    src:
-      "https://www.jiomart.com/images/product/150x150/490999937/tide-plus-jasmine-rose-detergent-powder-4-kg-get-1-kg-free-0-20210205.jpg",
-  },
-  {
-    id: 2,
-    name: "Tide Plus Jasmine & Rose Detergent",
-    mrp: 20,
-    saveOffer: 2,
-    sellingPrice: 18,
-    src:
-      "https://www.jiomart.com/images/product/150x150/490999937/tide-plus-jasmine-rose-detergent-powder-4-kg-get-1-kg-free-0-20210205.jpg",
-  },
-];
-
 function App() {
   return (
     <>
       <ThemeProvider theme={theme}>
         <Header />
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            marginTop: "4rem",
-          }}
+        <Box
+          maxWidth="lg"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          flexWrap="wrap"
+          style={{ border: "1px solid red", marginTop: "4rem" }}
         >
-          {products.map((product) => {
-            return <Products key={product.id} product={product} />;
-          })}
-        </div>
+          <Category name="sakso" />
+          <Category name="sakso" />
+          <Category name="sakso" />
+          <Category name="sakso" />
+        </Box>
         <CssBaseline />
       </ThemeProvider>
     </>

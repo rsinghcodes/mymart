@@ -64,7 +64,7 @@ export default function Products({ product }) {
           </CardContent>
         </CardActionArea>
         <CardActions>
-          <Button style={{ width: "100%" }} text="Add to cart" />
+          <Button style={{ width: "100%" }} text="+ Add to cart" />
         </CardActions>
       </Card>
     </>
