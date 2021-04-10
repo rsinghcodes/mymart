@@ -1,5 +1,5 @@
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import { Box, CssBaseline } from "@material-ui/core";
+import { Box, CssBaseline, Divider } from "@material-ui/core";
 import Header from "./Components/Header/Header";
 // import Products from "./Components/Products/Products";
 import Category from "./Components/Category/Category";
@@ -30,19 +30,18 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <Header />
+        <Divider style={{ margin: "3rem 0rem" }} />
         <Box
-          maxWidth="lg"
+          style={{
+            justifyContent: "space-around",
+          }}
           display="flex"
-          justifyContent="center"
           alignItems="center"
           flexWrap="wrap"
-          style={{ border: "1px solid red", marginTop: "4rem" }}
         >
-          <Category name="sakso" />
-          <Category name="sakso" />
-          <Category name="sakso" />
-          <Category name="sakso" />
+          <Category />
         </Box>
+        <Divider style={{ margin: "3rem 0rem" }} />
         <CssBaseline />
       </ThemeProvider>
     </>

@@ -11,12 +11,16 @@ export default makeStyles((theme) => ({
   label: {
     textTransform: "none",
   },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
   sectionDesktop: {
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex",
     },
   },
+  toolbar: theme.mixins.toolbar,
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {
