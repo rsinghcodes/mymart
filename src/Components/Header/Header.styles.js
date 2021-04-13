@@ -1,18 +1,13 @@
 import { makeStyles } from "@material-ui/core/styles";
 
+const drawerWidth = 220;
+
 export default makeStyles((theme) => ({
-  root: {
-    background: "#f5faff",
-    color: "#001833",
-  },
   grow: {
     flexGrow: 1,
   },
-  label: {
+  text: {
     textTransform: "none",
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   sectionDesktop: {
     display: "none",
@@ -21,6 +16,9 @@ export default makeStyles((theme) => ({
     },
   },
   toolbar: theme.mixins.toolbar,
+  drawer: {
+    width: drawerWidth,
+  },
   sectionMobile: {
     display: "flex",
     [theme.breakpoints.up("md")]: {

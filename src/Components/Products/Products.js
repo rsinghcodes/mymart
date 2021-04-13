@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "./Style";
+import useStyles from "./Products.styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Button from "../../Components/controls/Button";
+import Button from "../controls/Button";
 import { Divider } from "@material-ui/core";
 
 export default function Products({ product }) {

@@ -2,17 +2,13 @@ import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Badge from "@material-ui/core/Badge";
 import CategoryIcon from "@material-ui/icons/Category";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import CartIcon from "../cart-icon/Cart-icon";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import useStyles from "./Style";
+import useStyles from "./Header.styles";
 import {
-  Button,
   Divider,
-  Link,
   List,
   ListItem,
   ListItemIcon,
@@ -20,15 +16,15 @@ import {
   Menu,
   MenuItem,
   SwipeableDrawer,
+  Button,
 } from "@material-ui/core";
-import logo from "../../logo.png";
 import MenuIcon from "@material-ui/icons/Menu";
 
 const categories = [
   "Dairy & Bakery",
   "Biscuits & Cookies",
   "Atta, Flour & Sooji",
-  "Shampoos & Conditioners",
+  "Bath & Toilet",
 ];
 
 export default function PrimarySearchAppBar() {
@@ -57,9 +53,7 @@ export default function PrimarySearchAppBar() {
       <List disablePadding className={classes.drawer}>
         <ListItem button>
           <ListItemIcon>
-            <Badge badgeContent={10} color="secondary">
-              <ShoppingCartIcon />
-            </Badge>
+            <CartIcon />
           </ListItemIcon>
           <ListItemText primary="Cart Items" />
         </ListItem>
@@ -81,39 +75,31 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static" className={classes.root}>
+      <AppBar position="fixed" className={classes.root} elevation={4}>
         <Toolbar>
-          <Link
+          <Button
             href="/"
-            underline="none"
-            style={{ display: "flex", alignItems: "center" }}
+            style={{ fontWeight: "bold", fontSize: "1.5rem" }}
+            className={classes.text}
           >
-            <img
-              src={logo}
-              alt=""
-              style={{ width: "1.5rem", marginRight: "0.5rem" }}
-            />
-            <Typography className={classes.title} variant="h6" noWrap>
-              mymart
-            </Typography>
-          </Link>
+            mymart
+          </Button>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show cart items" color="inherit">
-              <Badge badgeContent={10} color="secondary">
-                <ShoppingCartIcon />
-              </Badge>
+              <CartIcon />
             </IconButton>
             <Button
               endIcon={<ExpandMoreIcon />}
-              className={classes.label}
               aria-label="show more"
               aria-controls={categoryMenuId}
               aria-haspopup="true"
               onClick={handleCategoryMenuOpen}
-              color="inherit"
+              variant="outlined"
+              className={classes.text}
+              style={{ margin: "0 1.5rem" }}
             >
-              {categories[selectedIndex] || "Category"}
+              {categories[selectedIndex] || "Categories"}
             </Button>
             <Menu
               open={isCategoryMenuOpen}
@@ -132,8 +118,11 @@ export default function PrimarySearchAppBar() {
                 );
               })}
             </Menu>
-            <Button className={classes.label}>Sign-in</Button>
+            <Button variant="outlined" href="/" className={classes.text}>
+              Sign-in
+            </Button>
           </div>
+
           <div className={classes.sectionMobile}>
             <IconButton
               edge="end"
@@ -147,6 +136,10 @@ export default function PrimarySearchAppBar() {
               anchor="right"
               open={drawerOpen}
               onClose={() => setDrawerOpen(false)}
+              style={{ width: "200%" }}
+              onOpen={() => {
+                return;
+              }}
             >
               {drawerItems}
             </SwipeableDrawer>
