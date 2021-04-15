@@ -3,10 +3,12 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import CategoryIcon from "@material-ui/icons/Category";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import ExpandMore from "@material-ui/icons/ExpandMore";
 import CartIcon from "../cart-icon/Cart-icon";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import useStyles from "./Header.styles";
+import useStyles, { MainLogo } from "./Header.styles";
 import {
   Divider,
   List,
@@ -17,8 +19,11 @@ import {
   MenuItem,
   SwipeableDrawer,
   Button,
+  Tooltip,
+  Collapse,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import { Link } from "react-router-dom";
 
 const categories = [
   "Dairy & Bakery",
@@ -27,12 +32,17 @@ const categories = [
   "Bath & Toilet",
 ];
 
-export default function PrimarySearchAppBar() {
+export default function Header() {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [categoryAnchorEl, setCategoryAnchorEl] = React.useState(null);
   const [selectedIndex, setSelectedIndex] = React.useState("Category");
   const isCategoryMenuOpen = Boolean(categoryAnchorEl);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   const handleCategoryMenuOpen = (event) => {
     setCategoryAnchorEl(event.currentTarget);
@@ -51,19 +61,30 @@ export default function PrimarySearchAppBar() {
       <div className={classes.toolbar} />
       <Divider />
       <List disablePadding className={classes.drawer}>
-        <ListItem button>
-          <ListItemIcon>
-            <CartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Cart Items" />
-        </ListItem>
-        <ListItem button>
+        <ListItem button onClick={handleClick}>
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
-          <ListItemText primary="Category" />
+          <ListItemText primary="Categories" />
+          {open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <ListItem button>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {categories.map((category, index) => {
+              return (
+                <ListItem button className={classes.nested} key={index}>
+                  <ListItemText primary={category} />
+                </ListItem>
+              );
+            })}
+          </List>
+        </Collapse>
+        <ListItem
+          button
+          component={Link}
+          to="/sign-in"
+          onClick={() => setDrawerOpen(false)}
+        >
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
@@ -74,78 +95,72 @@ export default function PrimarySearchAppBar() {
   );
 
   return (
-    <div className={classes.grow}>
-      <AppBar position="fixed" className={classes.root} elevation={4}>
-        <Toolbar>
-          <Button
-            href="/"
-            style={{ fontWeight: "bold", fontSize: "1.5rem" }}
-            className={classes.text}
-          >
-            mymart
-          </Button>
-          <div className={classes.grow} />
-          <div className={classes.sectionDesktop}>
-            <IconButton aria-label="show cart items" color="inherit">
-              <CartIcon />
-            </IconButton>
-            <Button
-              endIcon={<ExpandMoreIcon />}
-              aria-label="show more"
-              aria-controls={categoryMenuId}
-              aria-haspopup="true"
-              onClick={handleCategoryMenuOpen}
-              variant="outlined"
-              className={classes.text}
-              style={{ margin: "0 1.5rem" }}
-            >
-              {categories[selectedIndex] || "Categories"}
-            </Button>
-            <Menu
-              open={isCategoryMenuOpen}
-              anchorEl={categoryAnchorEl}
-              onClose={handleCategoryMenuClose}
-            >
-              {categories.map((category, index) => {
-                return (
-                  <MenuItem
-                    key={index}
-                    selected={selectedIndex === index}
-                    onClick={() => handleCategorySelect(index)}
-                  >
-                    {category}
-                  </MenuItem>
-                );
-              })}
-            </Menu>
-            <Button variant="outlined" href="/" className={classes.text}>
-              Sign-in
-            </Button>
-          </div>
+    <>
+      <div className={classes.grow}>
+        <AppBar position="fixed" elevation={0}>
+          <Toolbar className={classes.root}>
+            <MainLogo to="/">mymart</MainLogo>
+            <div className={classes.grow} />
+            <CartIcon />
+            <div className={classes.sectionDesktop}>
+              <Button
+                endIcon={<ExpandMoreIcon />}
+                aria-label="show more"
+                aria-controls={categoryMenuId}
+                aria-haspopup="true"
+                onClick={handleCategoryMenuOpen}
+                style={{ margin: "0 1.5rem" }}
+              >
+                {categories[selectedIndex] || "Categories"}
+              </Button>
+              <Menu
+                open={isCategoryMenuOpen}
+                anchorEl={categoryAnchorEl}
+                onClose={handleCategoryMenuClose}
+              >
+                {categories.map((category, index) => {
+                  return (
+                    <MenuItem
+                      key={index}
+                      selected={selectedIndex === index}
+                      onClick={() => handleCategorySelect(index)}
+                    >
+                      {category}
+                    </MenuItem>
+                  );
+                })}
+              </Menu>
 
-          <div className={classes.sectionMobile}>
-            <IconButton
-              edge="end"
-              color="inherit"
-              aria-label="open drawer"
-              onClick={() => setDrawerOpen(true)}
-            >
-              <MenuIcon />
-            </IconButton>
-            <SwipeableDrawer
-              anchor="right"
-              open={drawerOpen}
-              onClose={() => setDrawerOpen(false)}
-              style={{ width: "200%" }}
-              onOpen={() => {
-                return;
-              }}
-            >
-              {drawerItems}
-            </SwipeableDrawer>
-          </div>
-        </Toolbar>
-      </AppBar>
-    </div>
+              <Tooltip title="Sign-in to purchase">
+                <Button component={Link} to="/sign-in">
+                  Sign In
+                </Button>
+              </Tooltip>
+            </div>
+
+            <div className={classes.sectionMobile}>
+              <IconButton
+                edge="end"
+                aria-label="open drawer"
+                onClick={() => setDrawerOpen(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <SwipeableDrawer
+                anchor="right"
+                open={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+                onOpen={() => {
+                  return;
+                }}
+              >
+                {drawerItems}
+              </SwipeableDrawer>
+            </div>
+          </Toolbar>
+          <Divider />
+        </AppBar>
+      </div>
+    </>
   );
 }

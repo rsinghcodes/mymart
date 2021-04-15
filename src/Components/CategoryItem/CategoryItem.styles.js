@@ -1,17 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 export default makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    minWidth: 300,
-    width: "100%",
-  },
   image: {
     position: "relative",
     height: 200,
     margin: theme.spacing(1),
     [theme.breakpoints.down("xs")]: {
       width: "100% !important", // Overrides inline-style
+      height: 200,
     },
     "&:hover, &$focusVisible": {
       zIndex: 1,

@@ -4,7 +4,7 @@ import Directory from "../../Components/Directory/Directory";
 
 const Homepage = () => {
   return (
-    <Container>
+    <Container disableGutters>
       <Directory />
     </Container>
   );

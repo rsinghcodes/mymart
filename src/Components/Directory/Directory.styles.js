@@ -1,16 +1,12 @@
-import { makeStyles } from "@material-ui/core/styles";
+import styled from "styled-components";
 
-export default makeStyles((theme) => ({
-  root: {
-    overflow: "hidden",
-    marginTop: "0rem",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    minHeight: "100vh",
-    [theme.breakpoints.down("sm")]: {
-      overflow: "auto",
-      marginTop: "3rem",
-    },
-  },
-}));
+export const DirectoryContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  minwidth: 300;
+  width: 100%;
+  min-height: 90vh;
+  margin: 4rem auto 0rem auto;
+`;
