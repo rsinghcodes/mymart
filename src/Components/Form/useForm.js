@@ -29,7 +29,7 @@ export function useForm(initialFValues, validateOnChange = false, validate) {
   };
 }
 
-const Form = (props) => {
+export const Form = (props) => {
   const classes = useStyles();
   const { children, ...other } = props;
   return (
@@ -38,5 +38,3 @@ const Form = (props) => {
     </form>
   );
 };
-
-export default Form;

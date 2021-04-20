@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { CssBaseline } from "@material-ui/core";
+import { CssBaseline, useMediaQuery } from "@material-ui/core";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
+
 // import { AuthProvider } from "./Firebase/AuthProvider";
 
 function App() {
-  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [themeMode, setThemeMode] = useState("dark");
+  const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${themeMode})`);
   const theme = React.useMemo(
     () =>
       createMuiTheme({
@@ -27,8 +28,12 @@ function App() {
           secondary: {
             main: "#f83245",
           },
+          error: {
+            main: "#f83245",
+          },
           background: {
-            default: prefersDarkMode ? "#303030" : "#f5faff",
+            default: prefersDarkMode ? "#1f1f1f" : "#f5faff",
+            paper: prefersDarkMode ? "#1f1f1f" : "#fff",
           },
           text: {
             primary: prefersDarkMode ? "#f3f3f6" : "#001833",
@@ -37,12 +42,12 @@ function App() {
         overrides: {
           MuiAppBar: {
             colorPrimary: {
-              backgroundColor: prefersDarkMode ? "#303030" : "#fff",
+              backgroundColor: prefersDarkMode ? "#1f1f1f" : "#fff",
             },
           },
           MuiButton: {
             text: {
-              background: prefersDarkMode ? "#303030" : "#001833",
+              background: prefersDarkMode ? "#1f1f1f" : "#001833",
               borderWidth: "1px",
               borderStyle: "solid",
               borderColor: prefersDarkMode ? "#f3f3f6" : "#001833",
@@ -61,14 +66,24 @@ function App() {
       }),
     [prefersDarkMode]
   );
-  console.log(theme);
+
+  const handleThemeModeClick = () => {
+    if (themeMode === "dark") {
+      setThemeMode("light");
+    } else {
+      setThemeMode("dark");
+    }
+  };
 
   return (
     <>
       {/* <AuthProvider> */}
       <ThemeProvider theme={theme}>
         <Router>
-          <Header />
+          <Header
+            handleThemeModeClick={handleThemeModeClick}
+            themeMode={themeMode}
+          />
           <Routes />
         </Router>
         <Footer />

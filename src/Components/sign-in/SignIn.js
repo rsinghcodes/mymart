@@ -1,10 +1,11 @@
-// import { Link } from "react-router-dom";
 import React from "react";
 import { Button, Grid, Typography } from "@material-ui/core";
 import Input from "../../Components/controls/Input";
-import Form from "../Form/Form";
+import { Form } from "../Form/useForm";
+import useStyles from "./SignIn.styles";
 
 const SignIn = () => {
+  const classes = useStyles();
   const style = {
     marginBottom: "10px",
     marginRight: "10px",
@@ -12,16 +13,8 @@ const SignIn = () => {
 
   return (
     <Form>
-      <Grid
-        container
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-        }}
-      >
-        <Grid item xs={10} lg={8}>
+      <Grid container justify="center" alignItems="center">
+        <Grid item xs={11} lg={9} className={classes.item}>
           <Typography variant="h6" style={{ marginBottom: "20px" }}>
             Login to your account
           </Typography>
@@ -35,6 +28,7 @@ const SignIn = () => {
           <Input
             label="Password"
             name="password"
+            type="password"
             // value={values.password}
             // onChange={handleInputChange}
             // error={errors.password}
@@ -43,9 +37,7 @@ const SignIn = () => {
           <Button type="submit" style={style}>
             Sign In
           </Button>
-          <Button type="submit" style={style}>
-            Login with Google
-          </Button>
+          <Button style={style}>Login with Google</Button>
         </Grid>
       </Grid>
     </Form>
