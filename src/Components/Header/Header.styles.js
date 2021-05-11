@@ -1,8 +1,6 @@
 import { makeStyles, styled, withTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
-const drawerWidth = 240;
-
 export default makeStyles((theme) => ({
   root: {
     padding: "0 3rem",
@@ -12,17 +10,6 @@ export default makeStyles((theme) => ({
   },
   grow: {
     flexGrow: 1,
-  },
-  toolbar: theme.mixins.toolbar,
-  drawerHeader: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0, 1),
-    ...theme.mixins.toolbar,
-    justifyContent: "flex-start",
-  },
-  drawer: {
-    width: drawerWidth,
   },
   paper: {
     "& .MuiDrawer-paper": {
@@ -37,6 +24,6 @@ export default makeStyles((theme) => ({
 export const MainLogo = styled(withTheme(Link))((props) => ({
   color: props.theme.palette.primary.main,
   textDecoration: "none",
-  fontSize: "1.5rem",
+  fontSize: "1.2rem",
   fontWeight: "bold",
 }));

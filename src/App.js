@@ -15,7 +15,7 @@ function App() {
     () =>
       createMuiTheme({
         typography: {
-          fontFamily: ["Rubik"].join(","),
+          fontFamily: ["Poppins"].join(","),
         },
         palette: {
           type: prefersDarkMode ? "dark" : "light",

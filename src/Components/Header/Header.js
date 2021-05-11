@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CartIcon from "../cart-icon/Cart-icon";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 import useStyles, { MainLogo } from "./Header.styles";
@@ -10,23 +9,36 @@ import {
   Toolbar,
   AppBar,
   Tooltip,
+  Typography,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import DrawerItems from "../DrawerItems/DrawerItems";
+import CartIcon from "../cart-icon/Cart-icon";
 
 export default function Header({ handleThemeModeClick, themeMode }) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const handleClick = () => {
-    setOpen(!open);
+    setDrawerOpen(!drawerOpen);
   };
 
   return (
     <>
       <div className={classes.grow}>
         <AppBar position="fixed" elevation={0}>
+          <div
+            style={{
+              background: "#1f1f1f",
+              padding: "8px 0",
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="body2" style={{ color: "#f3f3f6" }}>
+              Welcome! Currently shipping over India only...
+            </Typography>
+          </div>
+          <Divider />
           <Toolbar className={classes.root}>
             <MainLogo to="/">mymart</MainLogo>
             <div className={classes.grow} />
@@ -63,7 +75,6 @@ export default function Header({ handleThemeModeClick, themeMode }) {
               <DrawerItems
                 setDrawerOpen={setDrawerOpen}
                 handleClick={handleClick}
-                open={open}
               />
             </SwipeableDrawer>
           </Toolbar>

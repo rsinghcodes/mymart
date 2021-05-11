@@ -14,7 +14,7 @@ const CategoryItem1 = ({ title, imageUrl, size, history, linkUrl, match }) => {
     <>
       <CategotyItemContainer
         size={size}
-        // onClick={() => history.push(`${match.url}${linkUrl}`)}
+        onClick={() => history.push(`${match.url}${linkUrl}`)}
       >
         <BackgroundImageContainer
           className="background-image"
@@ -23,7 +23,7 @@ const CategoryItem1 = ({ title, imageUrl, size, history, linkUrl, match }) => {
           }}
         />
         <ContentContainer className="content">
-          <ContentTitle>{title.toUpperCase()} COLLECTION</ContentTitle>
+          <ContentTitle>{title.toUpperCase()}</ContentTitle>
           <ContentSubtitle>BUY NOW</ContentSubtitle>
         </ContentContainer>
       </CategotyItemContainer>

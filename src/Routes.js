@@ -1,15 +1,21 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { Switch, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage/Homepage";
-import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up";
-// import PrivateRoute from "./Firebase/PrivateRoute";
+import Spinner from "./Components/Spinner/Spinner";
+
+const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
+const SignInAndSignUpPage = lazy(() =>
+  import("./pages/sign-in-and-sign-up/sign-in-and-sign-up")
+);
+const Checkoutpage = lazy(() => import("./pages/Checkout-page/Checkoutpage"));
 
 const Routes = () => {
   return (
     <Switch>
-      {/* <PrivateRoute exact path="/" component={Homepage} /> */}
-      <Route exact path="/" component={Homepage} />
-      <Route path="/sign-in" component={SignInAndSignUpPage} />
+      <Suspense fallback={<Spinner />}>
+        <Route exact path="/" component={Homepage} />
+        <Route path="/sign-in" component={SignInAndSignUpPage} />
+        <Route path="/checkout" component={Checkoutpage} />
+      </Suspense>
     </Switch>
   );
 };

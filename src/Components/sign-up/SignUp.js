@@ -28,6 +28,11 @@ const SignUp = (props) => {
       )
         ? ""
         : "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character required";
+    if ("confirmPassword" in fieldValues)
+      temp.confirmPassword =
+        fieldValues.confirmPassword === values.password
+          ? ""
+          : "Password didn't matched!";
     setErrors({
       ...temp,
     });
@@ -70,7 +75,6 @@ const SignUp = (props) => {
             value={values.email}
             onChange={handleInputChange}
             error={errors.email}
-            required
           />
           <Input
             label="Password"

@@ -6,7 +6,6 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  Typography,
   useTheme,
 } from "@material-ui/core";
 import React from "react";
@@ -16,6 +15,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CategoryIcon from "@material-ui/icons/Category";
 import { ExpandLess, ExpandMore } from "@material-ui/icons";
+import Chip from "@material-ui/core/Chip";
+import PersonIcon from "@material-ui/icons/Person";
 import useStyles from "./Drawer.styles";
 import { Link } from "react-router-dom";
 
@@ -26,9 +27,15 @@ const categories = [
   "Bath & Toilet",
 ];
 
-const DrawerItems = ({ setDrawerOpen, handleClick, open }) => {
+const DrawerItems = ({ setDrawerOpen, handleClick }) => {
   const classes = useStyles();
   const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleOpen = () => {
+    open ? setOpen(false) : setOpen(true);
+  };
+
   return (
     <>
       <div className={classes.drawerHeader}>
@@ -39,11 +46,11 @@ const DrawerItems = ({ setDrawerOpen, handleClick, open }) => {
             <ChevronRightIcon />
           )}
         </IconButton>
-        <Typography variant="body1">Raghvendra Singh</Typography>
+        <Chip icon={<PersonIcon />} color="primary" label={`Guest User`} />
       </div>
       <Divider />
       <List disablePadding className={classes.drawer}>
-        <ListItem button onClick={handleClick}>
+        <ListItem button onClick={handleOpen}>
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
@@ -54,7 +61,12 @@ const DrawerItems = ({ setDrawerOpen, handleClick, open }) => {
           <List component="div" disablePadding>
             {categories.map((category, index) => {
               return (
-                <ListItem button className={classes.nested} key={index}>
+                <ListItem
+                  button
+                  className={classes.nested}
+                  key={index}
+                  onClick={handleClick}
+                >
                   <ListItemText primary={category} />
                 </ListItem>
               );
