@@ -1,6 +1,11 @@
 import React, { lazy, Suspense } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Spinner from "./Components/Spinner/Spinner";
+import PrivateRoute from "./Firebase/PrivateRoute";
+
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./Redux/user/user.selector";
 
 const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
 const SignInAndSignUpPage = lazy(() =>
@@ -8,16 +13,25 @@ const SignInAndSignUpPage = lazy(() =>
 );
 const Checkoutpage = lazy(() => import("./pages/Checkout-page/Checkoutpage"));
 
-const Routes = () => {
+const Routes = ({ currentUser }) => {
   return (
     <Switch>
       <Suspense fallback={<Spinner />}>
         <Route exact path="/" component={Homepage} />
-        <Route path="/sign-in" component={SignInAndSignUpPage} />
-        <Route path="/checkout" component={Checkoutpage} />
+        <Route
+          path="/sign-in"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
+        <PrivateRoute path="/checkout" component={Checkoutpage} />
       </Suspense>
     </Switch>
   );
 };
 
-export default Routes;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(Routes);

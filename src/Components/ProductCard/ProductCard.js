@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "./Products.styles";
+import useStyles from "./ProductCard.styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,7 +10,7 @@ import Box from "@material-ui/core/Box";
 import Button from "../controls/Button";
 import { Divider } from "@material-ui/core";
 
-export default function Products({ product }) {
+export default function ProductCard({ product }) {
   const classes = useStyles();
   return (
     <>

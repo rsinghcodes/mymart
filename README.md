@@ -1,3 +1,12 @@
-# My Mart - An online mini mart store.
+# <em>My Mart - An online mini mart store.</em>
 
-#### [Click here for Demo](https://brave-leavitt-e8e846.netlify.app/)
+<dl>
+  <dt>→ Tech Stack</dt>
+  <dd>→ React</dd>
+  <dd>→ Material UI</dd>
+  <dd>→ Styled-Components</dd>
+  <dd>→ Redux</dd>
+  <dd>→ Firebase</dd>
+</dl>
+
+#### [Demo](https://mymart-ecomm.netlify.app/)

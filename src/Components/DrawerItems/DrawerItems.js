@@ -20,6 +20,11 @@ import PersonIcon from "@material-ui/icons/Person";
 import useStyles from "./Drawer.styles";
 import { Link } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../Redux/user/user.selector";
+import { auth } from "../../Firebase/Firebase.utils";
+
 const categories = [
   "Dairy & Bakery",
   "Biscuits & Cookies",
@@ -27,13 +32,18 @@ const categories = [
   "Bath & Toilet",
 ];
 
-const DrawerItems = ({ setDrawerOpen, handleClick }) => {
+const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => {
     open ? setOpen(false) : setOpen(true);
+  };
+
+  const handleSignoutbtn = () => {
+    auth.signOut();
+    setDrawerOpen(false);
   };
 
   return (
@@ -46,7 +56,11 @@ const DrawerItems = ({ setDrawerOpen, handleClick }) => {
             <ChevronRightIcon />
           )}
         </IconButton>
-        <Chip icon={<PersonIcon />} color="primary" label={`Guest User`} />
+        <Chip
+          icon={<PersonIcon />}
+          color="primary"
+          label={currentUser ? currentUser.displayName : "Guest User"}
+        />
       </div>
       <Divider />
       <List disablePadding className={classes.drawer}>
@@ -84,20 +98,33 @@ const DrawerItems = ({ setDrawerOpen, handleClick }) => {
           </ListItemIcon>
           <ListItemText primary="Your Orders" />
         </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/sign-in"
-          onClick={() => setDrawerOpen(false)}
-        >
-          <ListItemIcon>
-            <ExitToAppIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sign-in" />
-        </ListItem>
+        {currentUser ? (
+          <ListItem button onClick={handleSignoutbtn}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sign Out" />
+          </ListItem>
+        ) : (
+          <ListItem
+            button
+            component={Link}
+            to="/sign-in"
+            onClick={() => setDrawerOpen(false)}
+          >
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sign-in" />
+          </ListItem>
+        )}
       </List>
     </>
   );
 };
 
-export default DrawerItems;
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+});
+
+export default connect(mapStateToProps)(DrawerItems);

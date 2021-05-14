@@ -15,7 +15,12 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DrawerItems from "../DrawerItems/DrawerItems";
 import CartIcon from "../cart-icon/Cart-icon";
 
-export default function Header({ handleThemeModeClick, themeMode }) {
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { toggleTheme } from "../../Redux/theme/theme.action";
+import { selectThemeMode } from "../../Redux/theme/theme.selector";
+
+function Header({ toggleTheme, theme }) {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -43,16 +48,10 @@ export default function Header({ handleThemeModeClick, themeMode }) {
             <MainLogo to="/">mymart</MainLogo>
             <div className={classes.grow} />
             <Tooltip
-              title={`Switch to ${
-                themeMode === "light" ? "Light" : "Dark"
-              } mode`}
+              title={`Switch to ${theme === "light" ? "Light" : "Dark"} mode`}
             >
-              <IconButton onClick={handleThemeModeClick}>
-                {themeMode === "light" ? (
-                  <Brightness7Icon />
-                ) : (
-                  <Brightness4Icon />
-                )}
+              <IconButton onClick={toggleTheme}>
+                {theme === "light" ? <Brightness7Icon /> : <Brightness4Icon />}
               </IconButton>
             </Tooltip>
             <CartIcon />
@@ -84,3 +83,13 @@ export default function Header({ handleThemeModeClick, themeMode }) {
     </>
   );
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  toggleTheme: () => dispatch(toggleTheme()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  theme: selectThemeMode,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

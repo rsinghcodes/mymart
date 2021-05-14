@@ -4,30 +4,34 @@ import Input from "../../Components/controls/Input";
 import { useForm, Form } from "../Form/useForm";
 import useStyles from "./Signup.styles";
 
+import { auth, createUserProfileDocument } from "../../Firebase/Firebase.utils";
+
 const initialFValues = {
-  fullName: "",
+  displayName: "",
   email: "",
   password: "",
   confirmPassword: "",
 };
 
-const SignUp = (props) => {
+const SignUp = () => {
   const classes = useStyles();
-  // const { addRecords } = props;
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
-    if ("fullName" in fieldValues)
-      temp.fullName = fieldValues.fullName ? "" : "This field is required.";
+    if ("displayName" in fieldValues)
+      temp.displayName = fieldValues.displayName
+        ? ""
+        : "This field is required.";
     if ("email" in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid.";
     if ("password" in fieldValues)
-      temp.password = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,10}$/.test(
-        fieldValues.password
-      )
-        ? ""
-        : "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character required";
+      temp.password =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,10}$/.test(
+          fieldValues.password
+        )
+          ? ""
+          : "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character required";
     if ("confirmPassword" in fieldValues)
       temp.confirmPassword =
         fieldValues.confirmPassword === values.password
@@ -47,10 +51,19 @@ const SignUp = (props) => {
     validate
   );
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    const { displayName, email, password } = values;
+    event.preventDefault();
     if (validate()) {
-      // addRecords(values);
+      try {
+        const { user } = await auth.createUserWithEmailAndPassword(
+          email,
+          password
+        );
+        await createUserProfileDocument(user, { displayName });
+      } catch (error) {
+        alert(error);
+      }
       resetForm();
     }
   };
@@ -64,10 +77,10 @@ const SignUp = (props) => {
           </Typography>
           <Input
             label="Full Name"
-            name="fullName"
-            value={values.fullName}
+            name="displayName"
+            value={values.displayName}
             onChange={handleInputChange}
-            error={errors.fullName}
+            error={errors.displayName}
           />
           <Input
             label="Email"
@@ -79,7 +92,7 @@ const SignUp = (props) => {
           <Input
             label="Password"
             name="password"
-            type={values.showPassword ? "text" : "password"}
+            type="password"
             value={values.password}
             onChange={handleInputChange}
             error={errors.password}
@@ -87,7 +100,7 @@ const SignUp = (props) => {
           <Input
             label="Confirm Password"
             name="confirmPassword"
-            type={values.showPassword ? "text" : "password"}
+            type="password"
             value={values.confirmPassword}
             onChange={handleInputChange}
             error={errors.confirmPassword}

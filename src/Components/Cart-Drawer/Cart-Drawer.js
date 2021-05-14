@@ -1,14 +1,6 @@
 import React from "react";
-import {
-  Button,
-  Drawer,
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-} from "@material-ui/core";
+import { Button, Drawer, IconButton } from "@material-ui/core";
 import CartItem from "../CartItem/CartItem";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./Cart-Drawer.styles";
 import { Link } from "react-router-dom";
