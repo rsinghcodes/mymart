@@ -1,32 +1,32 @@
 import { Badge, IconButton, Tooltip } from "@material-ui/core";
-import React, { useState } from "react";
+import React from "react";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import CartDrawer from "../Cart-Drawer/Cart-Drawer";
-// import { Link } from "react-router-dom";
 
-const CartIcon = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCartItemsCount } from "../../Redux/cart/cart.selectors";
+import { toggleCartOpen } from "../../Redux/cart/cart.actions";
 
-  const handleClickOpen = () => {
-    setDrawerOpen(true);
-  };
+const CartIcon = ({ toggleCartOpen, itemCount }) => {
   return (
     <>
       <Tooltip title="Cart Items">
-        {/* <IconButton component={Link} to="/checkout">
-          <Badge badgeContent={10} color="secondary">
-            <ShoppingCartIcon />
-          </Badge>
-        </IconButton> */}
-        <IconButton onClick={handleClickOpen}>
-          <Badge badgeContent={10} color="secondary">
+        <IconButton onClick={toggleCartOpen}>
+          <Badge badgeContent={itemCount} color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
       </Tooltip>
-      <CartDrawer drawerOpen={drawerOpen} setDrawerOpen={setDrawerOpen} />
     </>
   );
 };
 
-export default CartIcon;
+const mapDispatchToProps = (dispath) => ({
+  toggleCartOpen: () => dispath(toggleCartOpen()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  itemCount: selectCartItemsCount,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartIcon);

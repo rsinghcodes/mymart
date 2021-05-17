@@ -7,32 +7,37 @@ import {
   ListItemIcon,
   ListItemText,
   useTheme,
+  Chip,
 } from "@material-ui/core";
 import React from "react";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import CategoryIcon from "@material-ui/icons/Category";
-import { ExpandLess, ExpandMore } from "@material-ui/icons";
-import Chip from "@material-ui/core/Chip";
-import PersonIcon from "@material-ui/icons/Person";
+import {
+  ExpandLess,
+  ExpandMore,
+  ExitToApp,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  Category,
+  Person,
+  LocalMall,
+  Security,
+} from "@material-ui/icons";
+
 import useStyles from "./Drawer.styles";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "../../Redux/user/user.selector";
+import { selectDirectorySections } from "../../Redux/directory/directory.selectors";
 import { auth } from "../../Firebase/Firebase.utils";
 
-const categories = [
-  "Dairy & Bakery",
-  "Biscuits & Cookies",
-  "Atta, Flour & Sooji",
-  "Bath & Toilet",
-];
-
-const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
+const DrawerItems = ({
+  setDrawerOpen,
+  handleClick,
+  currentUser,
+  categories,
+}) => {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -50,14 +55,10 @@ const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
     <>
       <div className={classes.drawerHeader}>
         <IconButton onClick={() => setDrawerOpen(false)}>
-          {theme.direction === "rtl" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
+          {theme.direction === "rtl" ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
         <Chip
-          icon={<PersonIcon />}
+          icon={<Person />}
           color="primary"
           label={currentUser ? currentUser.displayName : "Guest User"}
         />
@@ -66,22 +67,24 @@ const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
       <List disablePadding className={classes.drawer}>
         <ListItem button onClick={handleOpen}>
           <ListItemIcon>
-            <CategoryIcon />
+            <Category />
           </ListItemIcon>
           <ListItemText primary="Categories" />
           <ListItemIcon>{open ? <ExpandLess /> : <ExpandMore />}</ListItemIcon>
         </ListItem>
         <Collapse in={open} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            {categories.map((category, index) => {
+            {categories.map(({ title, id, linkUrl, match }) => {
               return (
                 <ListItem
                   button
                   className={classes.nested}
-                  key={index}
+                  key={id}
+                  component={Link}
+                  to={`/${linkUrl}`}
                   onClick={handleClick}
                 >
-                  <ListItemText primary={category} />
+                  <ListItemText primary={title} />
                 </ListItem>
               );
             })}
@@ -94,14 +97,25 @@ const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
           onClick={() => setDrawerOpen(false)}
         >
           <ListItemIcon>
-            <CheckCircleIcon />
+            <CheckCircle />
           </ListItemIcon>
           <ListItemText primary="Your Orders" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/shop"
+          onClick={() => setDrawerOpen(false)}
+        >
+          <ListItemIcon>
+            <LocalMall />
+          </ListItemIcon>
+          <ListItemText primary="Shop" />
         </ListItem>
         {currentUser ? (
           <ListItem button onClick={handleSignoutbtn}>
             <ListItemIcon>
-              <ExitToAppIcon />
+              <ExitToApp />
             </ListItemIcon>
             <ListItemText primary="Sign Out" />
           </ListItem>
@@ -113,7 +127,7 @@ const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
             onClick={() => setDrawerOpen(false)}
           >
             <ListItemIcon>
-              <ExitToAppIcon />
+              <Security />
             </ListItemIcon>
             <ListItemText primary="Sign-in" />
           </ListItem>
@@ -125,6 +139,7 @@ const DrawerItems = ({ setDrawerOpen, handleClick, currentUser }) => {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  categories: selectDirectorySections,
 });
 
 export default connect(mapStateToProps)(DrawerItems);

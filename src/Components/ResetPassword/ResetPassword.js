@@ -9,12 +9,15 @@ import Input from "../../Components/controls/Input";
 import { useForm } from "../Form/useForm";
 
 import { auth } from "../../Firebase/Firebase.utils";
+import { useMediaQuery, useTheme } from "@material-ui/core";
 
 const initialFValues = {
   email: "",
 };
 
 export default function ResetPassword(props) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [emailHasBeenSent, setEmailHasBeenSent] = React.useState(false);
   const { handlePasswordDialogClose, open } = props;
 
@@ -61,11 +64,14 @@ export default function ResetPassword(props) {
       open={open}
       onClose={handlePasswordDialogClose}
       aria-labelledby="form-dialog-title"
+      fullScreen={fullScreen}
     >
       <DialogTitle id="form-dialog-title">Reset Password ?</DialogTitle>
       {emailHasBeenSent ? (
         <DialogContent>
-          <DialogContentText>An email has been sent to you!</DialogContentText>
+          <DialogContentText>
+            An email has been sent to your email address.
+          </DialogContentText>
         </DialogContent>
       ) : (
         <>

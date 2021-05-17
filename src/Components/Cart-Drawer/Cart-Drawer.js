@@ -3,31 +3,56 @@ import { Button, Drawer, IconButton } from "@material-ui/core";
 import CartItem from "../CartItem/CartItem";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./Cart-Drawer.styles";
-import { Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
 
-const CartDrawer = ({ drawerOpen, setDrawerOpen }) => {
+import {
+  selectCartItems,
+  selectCartOpen,
+} from "../../Redux/cart/cart.selectors";
+import { toggleCartOpen } from "../../Redux/cart/cart.actions";
+
+const CartDrawer = ({ drawerOpen, cartItems, history, toggleCartOpen }) => {
   const classes = useStyles();
   return (
     <Drawer
+      className={classes.root}
       anchor="right"
-      open={drawerOpen}
-      onClose={() => setDrawerOpen(false)}
+      open="true"
+      onClose={toggleCartOpen}
     >
       <div className={classes.drawerHeader}>
-        <IconButton onClick={() => setDrawerOpen(false)}>
+        <IconButton onClick={toggleCartOpen}>
           <CloseIcon />
         </IconButton>
         <Button
-          component={Link}
-          to="/checkout"
-          onClick={() => setDrawerOpen(false)}
+          onClick={() => {
+            history.push("/checkout");
+            toggleCartOpen();
+          }}
         >
           Proceed to Checkout
         </Button>
       </div>
-      <CartItem />
+      {cartItems.length
+        ? cartItems.map((cartItem) => (
+            <CartItem key={cartItem.id} item={cartItem} />
+          ))
+        : "Your cart is empty"}
     </Drawer>
   );
 };
 
-export default CartDrawer;
+const mapDispatchToProps = (dispath) => ({
+  toggleCartOpen: () => dispath(toggleCartOpen()),
+});
+
+const mapStateToProps = createStructuredSelector({
+  cartItems: selectCartItems,
+  drawerOpen: selectCartOpen,
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(CartDrawer)
+);

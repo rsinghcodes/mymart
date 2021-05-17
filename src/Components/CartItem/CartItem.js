@@ -7,31 +7,33 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  Divider,
 } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import useStyles from "./CartItem.styles";
 
-const CartItem = () => {
+const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
-      <CardMedia
-        className={classes.media}
-        image="https://i.ibb.co/M59yT7B/dairy-And-Bakery.jpg"
-        title="Paella dish"
-      />
+    <Card className={classes.root} variant="outlined">
+      <CardMedia className={classes.media} image={imageUrl} title={name} />
       <CardContent>
-        <Typography variant="body1" component="p">
+        <Typography variant="body2" component="p">
           Perfect party dish and a fun meal.
         </Typography>
+        <Divider style={{ margin: "0.7rem 0rem" }} />
+        <Typography variant="body2" component="p">
+          Price: ₹ {price}
+        </Typography>
       </CardContent>
+
       <CardActions disableSpacing>
         <ButtonGroup color="primary" aria-label="outlined primary button group">
           <Button>
             <RemoveIcon />
           </Button>
-          <Button>1</Button>
+          <Button>{quantity}</Button>
           <Button>
             <AddIcon />
           </Button>

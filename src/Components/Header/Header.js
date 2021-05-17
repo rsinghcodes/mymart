@@ -1,17 +1,15 @@
 import React, { useState } from "react";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
 import useStyles, { MainLogo } from "./Header.styles";
 import {
-  Divider,
   SwipeableDrawer,
   IconButton,
   Toolbar,
   AppBar,
   Tooltip,
-  Typography,
+  useMediaQuery,
+  Divider,
 } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Menu, Brightness4, Brightness7 } from "@material-ui/icons";
 import DrawerItems from "../DrawerItems/DrawerItems";
 import CartIcon from "../cart-icon/Cart-icon";
 
@@ -21,6 +19,7 @@ import { toggleTheme } from "../../Redux/theme/theme.action";
 import { selectThemeMode } from "../../Redux/theme/theme.selector";
 
 function Header({ toggleTheme, theme }) {
+  const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`);
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
 
@@ -32,26 +31,12 @@ function Header({ toggleTheme, theme }) {
     <>
       <div className={classes.grow}>
         <AppBar position="fixed" elevation={0}>
-          <div
-            style={{
-              background: "#1f1f1f",
-              padding: "8px 0",
-              textAlign: "center",
-            }}
-          >
-            <Typography variant="body2" style={{ color: "#f3f3f6" }}>
-              Welcome! Currently shipping over India only...
-            </Typography>
-          </div>
-          <Divider />
           <Toolbar className={classes.root}>
             <MainLogo to="/">mymart</MainLogo>
             <div className={classes.grow} />
-            <Tooltip
-              title={`Switch to ${theme === "light" ? "Light" : "Dark"} mode`}
-            >
+            <Tooltip title="Switch to Dark/Light mode">
               <IconButton onClick={toggleTheme}>
-                {theme === "light" ? <Brightness7Icon /> : <Brightness4Icon />}
+                {prefersDarkMode ? <Brightness7 /> : <Brightness4 />}
               </IconButton>
             </Tooltip>
             <CartIcon />
@@ -60,7 +45,7 @@ function Header({ toggleTheme, theme }) {
               aria-label="open drawer"
               onClick={() => setDrawerOpen(true)}
             >
-              <MenuIcon />
+              <Menu />
             </IconButton>
             <SwipeableDrawer
               anchor="right"

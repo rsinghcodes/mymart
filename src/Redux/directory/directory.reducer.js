@@ -7,7 +7,7 @@ const INITIAL_STATE = {
       linkUrl: "shop/dairy-and-bakery",
     },
     {
-      title: "Atta, Flour & Sooji",
+      title: "Atta, Dal & Pulses",
       imageUrl:
         "https://i.ibb.co/2M6KK1C/photo-1610725664285-7c57e6eeac3f-ixid-Mnwx-Mj-A3f-DB8-MHxz-ZWFy-Y2h8-MXx8-Zmxvd-XJ8-ZW58-MHx8-MHx8-i.jpg",
       id: 2,

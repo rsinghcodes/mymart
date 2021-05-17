@@ -26,12 +26,11 @@ const SignUp = () => {
         ? ""
         : "Email is not valid.";
     if ("password" in fieldValues)
-      temp.password =
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,10}$/.test(
-          fieldValues.password
-        )
-          ? ""
-          : "Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character required";
+      temp.password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(
+        fieldValues.password
+      )
+        ? ""
+        : "Minimum six characters, at least one letter and one number.";
     if ("confirmPassword" in fieldValues)
       temp.confirmPassword =
         fieldValues.confirmPassword === values.password
@@ -62,7 +61,7 @@ const SignUp = () => {
         );
         await createUserProfileDocument(user, { displayName });
       } catch (error) {
-        alert(error);
+        alert(error.message);
       }
       resetForm();
     }

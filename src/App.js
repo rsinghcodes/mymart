@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CssBaseline } from "@material-ui/core";
+import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import Theme from "./Components/Theme/Theme";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
@@ -12,13 +12,30 @@ import { auth, createUserProfileDocument } from "./Firebase/Firebase.utils";
 import { setCurrentUser } from "./Redux/user/user.actions";
 import { selectCurrentUser } from "./Redux/user/user.selector";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    marginTop: theme.spacing(9),
+  },
+}));
+
 function App(props) {
+  const classes = useStyles();
   const { setCurrentUser } = props;
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
-      const userRef = await createUserProfileDocument(userAuth);
-      setCurrentUser(userRef);
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+
+        userRef.onSnapshot((snapShot) => {
+          setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data(),
+          });
+        });
+      }
+
+      setCurrentUser(userAuth);
     });
     return () => {
       unsubscribeFromAuth();
@@ -30,7 +47,9 @@ function App(props) {
       <Theme>
         <Router>
           <Header />
-          <Routes />
+          <Container disableGutters className={classes.root}>
+            <Routes />
+          </Container>
         </Router>
         <Footer />
         <CssBaseline />

@@ -4,23 +4,23 @@ import storage from "redux-persist/lib/storage";
 
 import themeReducer from "./theme/theme.reducer";
 import userReducer from "./user/user.reducer";
-// import cartReducer from "./cart/cart.reducer";
+import cartReducer from "./cart/cart.reducer";
 import directoryReducer from "./directory/directory.reducer";
-// import shopReducer from "./shop/shop.reducer";
+import shopReducer from "./shop/shop.reducer";
 // import favoriteReducer from "./favorite/favorite.reducer";
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["user", "cart", "favorite", "theme"],
+  whitelist: ["user", "cart", "theme", "favorite"],
 };
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   user: userReducer,
-  // cart: cartReducer,
+  cart: cartReducer,
   directory: directoryReducer,
-  // shop: shopReducer,
+  shop: shopReducer,
   // favorite: favoriteReducer,
 });
 

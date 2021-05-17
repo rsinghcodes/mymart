@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
   drawerHeader: {
     position: "sticky",
     top: "0",
@@ -11,6 +14,6 @@ export default makeStyles((theme) => ({
     justifyContent: "space-between",
     padding: theme.spacing(0, 1),
     ...theme.mixins.toolbar,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.background.default,
   },
 }));

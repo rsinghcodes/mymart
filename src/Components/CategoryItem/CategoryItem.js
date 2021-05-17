@@ -9,7 +9,7 @@ import {
   ContentSubtitle,
 } from "./category-item.styles";
 
-const CategoryItem1 = ({ title, imageUrl, size, history, linkUrl, match }) => {
+const CategoryItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
   return (
     <>
       <CategotyItemContainer
@@ -31,4 +31,4 @@ const CategoryItem1 = ({ title, imageUrl, size, history, linkUrl, match }) => {
   );
 };
 
-export default withRouter(CategoryItem1);
+export default withRouter(CategoryItem);

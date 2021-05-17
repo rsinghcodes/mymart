@@ -2,11 +2,7 @@ import React from "react";
 import CheckoutDirectory from "../../Components/CheckoutDirectory/CheckoutDirectory";
 
 const Cartpage = () => {
-  return (
-    <>
-      <CheckoutDirectory />
-    </>
-  );
+  return <CheckoutDirectory />;
 };
 
 export default Cartpage;

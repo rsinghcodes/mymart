@@ -12,12 +12,14 @@ const SignInAndSignUpPage = lazy(() =>
   import("./pages/sign-in-and-sign-up/sign-in-and-sign-up")
 );
 const Checkoutpage = lazy(() => import("./pages/Checkout-page/Checkoutpage"));
+const Shop = lazy(() => import("./pages/shop/Shop"));
 
 const Routes = ({ currentUser }) => {
   return (
     <Switch>
       <Suspense fallback={<Spinner />}>
         <Route exact path="/" component={Homepage} />
+        <Route path="/shop" component={Shop} />
         <Route
           path="/sign-in"
           render={() =>

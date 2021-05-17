@@ -11,11 +11,6 @@ export default makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
   },
-  paper: {
-    "& .MuiDrawer-paper": {
-      backgroundColor: theme.palette.background.paper,
-    },
-  },
   nested: {
     paddingLeft: theme.spacing(4),
   },
