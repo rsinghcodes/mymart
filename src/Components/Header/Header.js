@@ -2,23 +2,30 @@ import React, { useState } from "react";
 import useStyles, { MainLogo } from "./Header.styles";
 import {
   SwipeableDrawer,
-  IconButton,
   Toolbar,
   AppBar,
-  Tooltip,
   useMediaQuery,
-  Divider,
+  Badge,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
-import { Menu, Brightness4, Brightness7 } from "@material-ui/icons";
+import {
+  Menu,
+  Brightness4,
+  Brightness7,
+  ShoppingCart,
+} from "@material-ui/icons";
 import DrawerItems from "../DrawerItems/DrawerItems";
-import CartIcon from "../cart-icon/Cart-icon";
+import CartDrawer from "../Cart-Drawer/Cart-Drawer";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { toggleTheme } from "../../Redux/theme/theme.action";
 import { selectThemeMode } from "../../Redux/theme/theme.selector";
+import { selectCartItemsCount } from "../../Redux/cart/cart.selectors";
+import { toggleCartOpen } from "../../Redux/cart/cart.actions";
 
-function Header({ toggleTheme, theme }) {
+function Header({ toggleTheme, theme, toggleCartOpen, itemCount }) {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`);
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -39,7 +46,14 @@ function Header({ toggleTheme, theme }) {
                 {prefersDarkMode ? <Brightness7 /> : <Brightness4 />}
               </IconButton>
             </Tooltip>
-            <CartIcon />
+            <Tooltip title="Cart Items">
+              <IconButton onClick={toggleCartOpen}>
+                <Badge badgeContent={itemCount} color="secondary">
+                  <ShoppingCart />
+                </Badge>
+              </IconButton>
+            </Tooltip>
+            <CartDrawer />
             <IconButton
               edge="end"
               aria-label="open drawer"
@@ -62,7 +76,6 @@ function Header({ toggleTheme, theme }) {
               />
             </SwipeableDrawer>
           </Toolbar>
-          <Divider />
         </AppBar>
       </div>
     </>
@@ -71,10 +84,12 @@ function Header({ toggleTheme, theme }) {
 
 const mapDispatchToProps = (dispatch) => ({
   toggleTheme: () => dispatch(toggleTheme()),
+  toggleCartOpen: () => dispatch(toggleCartOpen()),
 });
 
 const mapStateToProps = createStructuredSelector({
   theme: selectThemeMode,
+  itemCount: selectCartItemsCount,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -16,4 +16,11 @@ export default makeStyles((theme) => ({
     ...theme.mixins.toolbar,
     backgroundColor: theme.palette.background.default,
   },
+  cartItemBox: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    flexDirection: "column",
+  },
 }));

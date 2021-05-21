@@ -10,8 +10,15 @@ import {
   Button,
   Grid,
 } from "@material-ui/core";
+import { connect } from "react-redux";
+import {
+  clearItemFromCart,
+  addItem,
+  removeItem,
+} from "../../Redux/cart/cart.actions";
 
-const CheckoutItem = () => {
+const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
+  const { name, imageUrl, price, quantity } = cartItem;
   const classes = useStyles();
   return (
     <>
@@ -19,11 +26,7 @@ const CheckoutItem = () => {
         <Grid container spacing={2}>
           <Grid item>
             <ButtonBase className={classes.image}>
-              <img
-                className={classes.img}
-                alt="complex"
-                src={`https://i.ibb.co/M59yT7B/dairy-And-Bakery.jpg`}
-              />
+              <img className={classes.img} alt="complex" src={imageUrl} />
             </ButtonBase>
           </Grid>
           <Grid
@@ -36,19 +39,18 @@ const CheckoutItem = () => {
             <Grid item xs={12} md={8} container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                  Aashirwaad Atta 5 kg Packet
-                </Typography>
-                <Typography variant="body2" gutterBottom>
-                  Multigrain with full of nutrition make you more energise.
+                  {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  MRP: ₹ 150
+                  Price: ₹ {price}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12} md={4} container direction="column" spacing={2}>
               <Grid item style={pricingGrid}>
-                <Typography variant="subtitle1">₹ 300.00</Typography>
+                <Typography variant="subtitle1">
+                  ₹ {price * quantity}
+                </Typography>
               </Grid>
 
               <Grid item style={pricingGrid}>
@@ -56,17 +58,21 @@ const CheckoutItem = () => {
                   color="primary"
                   aria-label="outlined primary button group"
                 >
-                  <Button>
+                  <Button onClick={() => removeItem(cartItem)}>
                     <RemoveIcon />
                   </Button>
-                  <Button>2</Button>
-                  <Button>
+                  <Button>{quantity}</Button>
+                  <Button onClick={() => addItem(cartItem)}>
                     <AddIcon />
                   </Button>
                 </ButtonGroup>
               </Grid>
               <Grid item style={pricingGrid}>
-                <Button variant="contained" color="secondary">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => clearItem(cartItem)}
+                >
                   Remove
                 </Button>
               </Grid>
@@ -78,4 +84,10 @@ const CheckoutItem = () => {
   );
 };
 
-export default CheckoutItem;
+const mapDispatchToProps = (dispatch) => ({
+  clearItem: (item) => dispatch(clearItemFromCart(item)),
+  addItem: (item) => dispatch(addItem(item)),
+  removeItem: (item) => dispatch(removeItem(item)),
+});
+
+export default connect(null, mapDispatchToProps)(CheckoutItem);

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Spinner from "./Components/Spinner/Spinner";
-import PrivateRoute from "./Firebase/PrivateRoute";
+// import PrivateRoute from "./Firebase/PrivateRoute";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -26,7 +26,8 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
           }
         />
-        <PrivateRoute path="/checkout" component={Checkoutpage} />
+        <Route path="/checkout" component={Checkoutpage} />
+        {/* <PrivateRoute path="/checkout" component={Checkoutpage} /> */}
       </Suspense>
     </Switch>
   );

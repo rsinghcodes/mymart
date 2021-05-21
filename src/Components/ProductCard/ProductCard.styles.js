@@ -2,7 +2,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   root: {
-    maxWidth: 200,
+    width: "100%",
+    maxWidth: 290,
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",

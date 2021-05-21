@@ -19,7 +19,7 @@ const CartDrawer = ({ drawerOpen, cartItems, history, toggleCartOpen }) => {
     <Drawer
       className={classes.root}
       anchor="right"
-      open="true"
+      open={drawerOpen}
       onClose={toggleCartOpen}
     >
       <div className={classes.drawerHeader}>
@@ -35,11 +35,13 @@ const CartDrawer = ({ drawerOpen, cartItems, history, toggleCartOpen }) => {
           Proceed to Checkout
         </Button>
       </div>
-      {cartItems.length
-        ? cartItems.map((cartItem) => (
-            <CartItem key={cartItem.id} item={cartItem} />
-          ))
-        : "Your cart is empty"}
+      <div className={classes.cartItemBox}>
+        {cartItems.length
+          ? cartItems.map((cartItem) => (
+              <CartItem key={cartItem.id} item={cartItem} />
+            ))
+          : "Your cart is empty"}
+      </div>
     </Drawer>
   );
 };

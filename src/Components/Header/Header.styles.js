@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 export default makeStyles((theme) => ({
   root: {
-    padding: "0 3rem",
+    padding: "0 40px",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.22)",
     [theme.breakpoints.down("sm")]: {
       padding: "0 1rem",
     },
