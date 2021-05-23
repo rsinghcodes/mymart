@@ -46,10 +46,10 @@ export const addCollectionAndDocuments = async (
 
 export const convertCollectionSnapshotToMap = (collections) => {
   const transformedCollection = collections.docs.map((doc) => {
-    const { title, items } = doc.data();
+    const { routeName, title, items } = doc.data();
     return {
       // convert symbols URL can read
-      routeName: encodeURI(title.toLowerCase()),
+      routeName: encodeURI(routeName.toLowerCase()),
       id: doc.id,
       title,
       items,
@@ -57,7 +57,7 @@ export const convertCollectionSnapshotToMap = (collections) => {
   });
 
   return transformedCollection.reduce((accumulator, collection) => {
-    accumulator[collection.title.toLowerCase()] = collection;
+    accumulator[collection.routeName.toLowerCase()] = collection;
     return accumulator;
   }, {});
 };

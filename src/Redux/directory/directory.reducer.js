@@ -1,10 +1,10 @@
 const INITIAL_STATE = {
   categories: [
     {
-      title: "Dairy & Bakery",
+      title: "Food & Snacks",
       imageUrl: "https://i.ibb.co/M59yT7B/dairy-And-Bakery.jpg",
       id: 1,
-      linkUrl: "shop/dairy-and-bakery",
+      linkUrl: "shop/food-and-snacks",
     },
     {
       title: "Atta, Dal & Pulses",
@@ -14,18 +14,18 @@ const INITIAL_STATE = {
       linkUrl: "shop/staples",
     },
     {
-      title: "Soap & Shampoo",
+      title: "Bath & Body",
       imageUrl:
         "https://i.ibb.co/vz4T6TX/photo-1570040546652-7811017b628b-ixid-Mnwx-Mj-A3f-DB8-MHxz-ZWFy-Y2h8-MTh8f-HNv-YXAl-Mj-Bi-YXJ8-ZW58.jpg",
       id: 3,
-      linkUrl: "shop/soap-and-shampoo",
+      linkUrl: "shop/bath-and-body",
     },
     {
-      title: "Toilet & Sanitary",
+      title: "Toilet & Hygiene",
       imageUrl:
         "https://i.ibb.co/0GvRqxN/photo-1585690359409-9020f3602bdb-ixid-Mnwx-Mj-A3f-DB8-MHxz-ZWFy-Y2h8-Mz-V8f-HRva-Wxld-CUy-MHBhc-GVyf.jpg",
       id: 4,
-      linkUrl: "shop/toilet-and-sanitary",
+      linkUrl: "shop/toilet-and-hygiene",
     },
   ],
 };

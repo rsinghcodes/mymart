@@ -1,11 +1,16 @@
 import { Container, makeStyles } from "@material-ui/core";
 import { connect } from "react-redux";
-import { fetchCollectionsStartAsync } from "../../Redux/shop/shop.actions";
 import React, { lazy, Suspense, useEffect } from "react";
+import { Route } from "react-router-dom";
+
 import Spinner from "../../Components/Spinner/Spinner";
+import { fetchCollectionsStartAsync } from "../../Redux/shop/shop.actions";
 
 const CollectionsOverviewContainer = lazy(() =>
   import("../../Components/collections-overview/collections-overview.container")
+);
+const CollectionPageContainer = lazy(() =>
+  import("../collection/collection.container")
 );
 
 const useStyles = makeStyles((theme) => ({
@@ -15,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Shop({ fetchCollectionsStartAsync }) {
+function Shop({ fetchCollectionsStartAsync, match }) {
   const classes = useStyles();
   useEffect(() => {
     fetchCollectionsStartAsync();
@@ -24,7 +29,15 @@ function Shop({ fetchCollectionsStartAsync }) {
   return (
     <Container disableGutters className={classes.root}>
       <Suspense fallback={<Spinner />}>
-        <CollectionsOverviewContainer />
+        <Route
+          exact
+          path={`${match.path}`}
+          component={CollectionsOverviewContainer}
+        />
+        <Route
+          path={`${match.path}/:collectionId`}
+          component={CollectionPageContainer}
+        />
       </Suspense>
     </Container>
   );

@@ -3,6 +3,7 @@ import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import Theme from "./Components/Theme/Theme";
 import Header from "./Components/Header/Header";
 import Footer from "./Components/Footer/Footer";
+import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
@@ -44,16 +45,18 @@ function App(props) {
 
   return (
     <>
-      <Theme>
-        <Router>
-          <Header />
-          <Container className={classes.root}>
-            <Routes />
-          </Container>
-        </Router>
-        <Footer />
-        <CssBaseline />
-      </Theme>
+      <ErrorBoundary>
+        <Theme>
+          <Router>
+            <Header />
+            <Container className={classes.root}>
+              <Routes />
+            </Container>
+          </Router>
+          <Footer />
+          <CssBaseline />
+        </Theme>
+      </ErrorBoundary>
     </>
   );
 }
