@@ -72,6 +72,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
                   variant="contained"
                   color="secondary"
                   onClick={() => clearItem(cartItem)}
+                  disableElevation
                 >
                   Remove
                 </Button>

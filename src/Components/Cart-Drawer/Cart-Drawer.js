@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Drawer, IconButton } from "@material-ui/core";
+import { Box, Button, Drawer, IconButton } from "@material-ui/core";
 import CartItem from "../CartItem/CartItem";
 import CloseIcon from "@material-ui/icons/Close";
 import useStyles from "./Cart-Drawer.styles";
@@ -16,17 +16,15 @@ import { toggleCartOpen } from "../../Redux/cart/cart.actions";
 const CartDrawer = ({ drawerOpen, cartItems, history, toggleCartOpen }) => {
   const classes = useStyles();
   return (
-    <Drawer
-      className={classes.root}
-      anchor="right"
-      open={drawerOpen}
-      onClose={toggleCartOpen}
-    >
+    <Drawer anchor="right" open={drawerOpen} onClose={toggleCartOpen}>
       <div className={classes.drawerHeader}>
         <IconButton onClick={toggleCartOpen}>
           <CloseIcon />
         </IconButton>
         <Button
+          variant="contained"
+          color="primary"
+          disableElevation
           onClick={() => {
             history.push("/checkout");
             toggleCartOpen();
@@ -36,11 +34,20 @@ const CartDrawer = ({ drawerOpen, cartItems, history, toggleCartOpen }) => {
         </Button>
       </div>
       <div className={classes.cartItemBox}>
-        {cartItems.length
-          ? cartItems.map((cartItem) => (
-              <CartItem key={cartItem.id} item={cartItem} />
-            ))
-          : "Your cart is empty"}
+        {cartItems.length ? (
+          cartItems.map((cartItem) => (
+            <CartItem key={cartItem.id} item={cartItem} />
+          ))
+        ) : (
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            style={{ minHeight: "80vh" }}
+          >
+            Your cart is empty
+          </Box>
+        )}
       </div>
     </Drawer>
   );

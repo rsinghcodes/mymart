@@ -81,10 +81,22 @@ const SignIn = () => {
               error={errors.password}
             />
 
-            <Button type="submit" style={style}>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              type="submit"
+              style={style}
+            >
               Sign In
             </Button>
-            <Button style={style} onClick={handlePasswordDialogOpen}>
+            <Button
+              variant="contained"
+              color="primary"
+              disableElevation
+              style={style}
+              onClick={handlePasswordDialogOpen}
+            >
               Forgot Password ?
             </Button>
             <Button style={style} onClick={signInWithGoogle}>

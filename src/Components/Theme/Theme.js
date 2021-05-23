@@ -33,23 +33,6 @@ const Theme = ({ children, themeMode }) => {
           backgroundColor: prefersDarkMode ? "#333" : "#fff",
         },
       },
-      MuiButton: {
-        text: {
-          background: prefersDarkMode ? grey[900] : "#001833",
-          borderWidth: "1px",
-          borderStyle: "solid",
-          borderColor: prefersDarkMode ? grey[50] : "#001833",
-          borderRadius: 0,
-          color: grey[50],
-          height: 45,
-          padding: "0 35px",
-          textTransform: "none",
-
-          "&:hover": {
-            color: prefersDarkMode ? grey[50] : "#001833",
-          },
-        },
-      },
     },
   });
 

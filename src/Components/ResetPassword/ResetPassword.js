@@ -89,10 +89,23 @@ export default function ResetPassword(props) {
             />
           </DialogContent>
           <DialogActions>
-            <Button autoFocus onClick={handlePasswordDialogClose}>
+            <Button
+              variant="contained"
+              color="secondary"
+              autoFocus
+              onClick={handlePasswordDialogClose}
+              disableElevation
+            >
               Cancel
             </Button>
-            <Button onClick={sendResetEmail}>Send</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={sendResetEmail}
+              disableElevation
+            >
+              Send
+            </Button>
           </DialogActions>
         </>
       )}

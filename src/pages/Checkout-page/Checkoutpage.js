@@ -71,7 +71,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Shipping Cost:</p>
-            <p>₹ {total > 500 ? "00" : "40"}</p>
+            <p>₹ {total > 800 ? "00" : "40"}</p>
           </Grid>
 
           <Grid
@@ -81,15 +81,26 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Net Payable:</p>
-            <p>₹ {total == "0" ? "0" : total > 500 ? total : total + 40}</p>
+            <p>₹ {total == "0" ? "0" : total > 800 ? total : total + 40}</p>
           </Grid>
           <Divider />
+          <Typography
+            variant="body2"
+            component="p"
+            style={{ marginTop: "12px" }}
+          >
+            {total > 800
+              ? "You are eligible for free delivery."
+              : "Shipping cost above ₹ 800 is free."}
+          </Typography>
           <Button
+            variant="contained"
+            color="primary"
             startIcon={<LockOutlinedIcon />}
             style={{ width: "100%", marginTop: "12px" }}
             disableElevation
           >
-            Proceed to Buy
+            Proceed to Pay
           </Button>
         </Paper>
       </Grid>

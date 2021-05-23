@@ -105,7 +105,14 @@ const SignUp = () => {
             error={errors.confirmPassword}
           />
 
-          <Button type="submit">Sign Up</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            disableElevation
+          >
+            Sign Up
+          </Button>
         </Grid>
       </Grid>
     </Form>

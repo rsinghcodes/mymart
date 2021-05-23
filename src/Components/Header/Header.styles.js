@@ -3,17 +3,22 @@ import { Link } from "react-router-dom";
 
 export default makeStyles((theme) => ({
   root: {
-    padding: "0 40px",
     boxShadow: "0 10px 20px rgba(0,0,0,0.22)",
-    [theme.breakpoints.down("sm")]: {
-      padding: "0 1rem",
-    },
   },
   grow: {
     flexGrow: 1,
   },
-  nested: {
-    paddingLeft: theme.spacing(4),
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
   },
 }));
 

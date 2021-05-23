@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
 export const CategotyItemContainer = styled.div`
-  height: 300px;
-  min-width: 40%;
+  height: 200px;
+  width: 25%;
   overflow: hidden;
   flex: 1 1 auto;
   display: flex;
   align-items: flex-end;
-  justify-content: flex-start;
-  margin: 0 7.5px 15px;
+  justify-content: center;
+  flex-direction: row;
+  margin: 0px 0px 15px;
   overflow: hidden;
   &:hover {
     cursor: pointer;
@@ -20,15 +21,8 @@ export const CategotyItemContainer = styled.div`
       opacity: 0.9;
     }
   }
-  &:first-child {
-    margin-right: 7.5px;
-  }
-  &:last-child {
-    margin-left: 7.5px;
-  }
   @media (max-width: 800px) {
-    height: 200px;
-    min-width: 50%;
+    width: 100%;
   }
 `;
 

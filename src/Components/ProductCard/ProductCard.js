@@ -32,7 +32,13 @@ const ProductCard = ({ item, addItem, typeOfAction }) => {
         </CardContent>
 
         <CardActions>
-          <Button style={{ width: "100%" }} onClick={() => addItem(item)}>
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            style={{ width: "100%" }}
+            onClick={() => addItem(item)}
+          >
             Add to cart
           </Button>
         </CardActions>

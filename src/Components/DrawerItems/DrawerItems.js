@@ -26,17 +26,12 @@ import {
 import useStyles from "./Drawer.styles";
 import { Link } from "react-router-dom";
 
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../../Redux/user/user.selector";
-import { selectDirectorySections } from "../../Redux/directory/directory.selectors";
-import { auth } from "../../Firebase/Firebase.utils";
-
 const DrawerItems = ({
   setDrawerOpen,
   handleClick,
   currentUser,
   categories,
+  handleSignoutbtn,
 }) => {
   const classes = useStyles();
   const theme = useTheme();
@@ -44,11 +39,6 @@ const DrawerItems = ({
 
   const handleOpen = () => {
     open ? setOpen(false) : setOpen(true);
-  };
-
-  const handleSignoutbtn = () => {
-    auth.signOut();
-    setDrawerOpen(false);
   };
 
   return (
@@ -137,9 +127,4 @@ const DrawerItems = ({
   );
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  categories: selectDirectorySections,
-});
-
-export default connect(mapStateToProps)(DrawerItems);
+export default DrawerItems;

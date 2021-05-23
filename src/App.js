@@ -14,7 +14,7 @@ import { selectCurrentUser } from "./Redux/user/user.selector";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(9),
+    marginTop: theme.spacing(10),
   },
 }));
 
@@ -47,7 +47,7 @@ function App(props) {
       <Theme>
         <Router>
           <Header />
-          <Container disableGutters className={classes.root}>
+          <Container className={classes.root}>
             <Routes />
           </Container>
         </Router>
