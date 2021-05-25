@@ -4,10 +4,12 @@ import {
   Typography,
   Grid,
   Paper,
-  Button,
+  // Button,
   Box,
+  Button,
+  Card,
+  CardContent,
 } from "@material-ui/core";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "./Checkoutpage.styles";
 import CheckoutItem from "../../Components/Checkout-Item/Checkout-Item";
 
@@ -17,8 +19,11 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../Redux/cart/cart.selectors";
+import PaymentButton from "../../Components/PaymentButton/PaymentButton";
+import { LockOutlined } from "@material-ui/icons";
 
 const Cartpage = ({ cartItems, total }) => {
+  const netTotal = total === 0 ? "0" : total > 100 ? total : total + 40;
   const classes = useStyles();
 
   return (
@@ -62,7 +67,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Items Total:</p>
-            <p>₹ {total}</p>
+            <p>$ {total}</p>
           </Grid>
           <Grid
             container
@@ -71,7 +76,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Shipping Cost:</p>
-            <p>₹ {total > 800 ? "00" : "40"}</p>
+            <p>$ {total > 100 ? "00" : "40"}</p>
           </Grid>
 
           <Grid
@@ -81,7 +86,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Net Payable:</p>
-            <p>₹ {total == "0" ? "0" : total > 800 ? total : total + 40}</p>
+            <p>$ {netTotal}</p>
           </Grid>
           <Divider />
           <Typography
@@ -89,19 +94,32 @@ const Cartpage = ({ cartItems, total }) => {
             component="p"
             style={{ marginTop: "12px" }}
           >
-            {total > 800
+            {total > 100
               ? "You are eligible for free delivery."
-              : "Shipping cost above ₹ 800 is free."}
+              : "Shipping cost above $ 100 is free."}
           </Typography>
-          <Button
+          {/* <Button
             variant="contained"
             color="primary"
-            startIcon={<LockOutlinedIcon />}
+            startIcon={<LockOutlined />}
             style={{ width: "100%", marginTop: "12px" }}
             disableElevation
           >
-            Proceed to Pay
-          </Button>
+          </Button> */}
+          <div
+            style={{ width: "100%", marginTop: "12px", textAlign: "center" }}
+          >
+            <PaymentButton price={netTotal} />
+          </div>
+          <Card>
+            <CardContent>
+              <Typography variant="body2">
+                Card Number: 4242 4242 4242 4242
+              </Typography>
+              <Typography variant="body2">Expiry: 01/22</Typography>
+              <Typography variant="body2">CVV: 123</Typography>
+            </CardContent>
+          </Card>
         </Paper>
       </Grid>
     </Box>

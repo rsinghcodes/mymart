@@ -13,12 +13,12 @@ import {
   Menu,
 } from "@material-ui/core";
 import {
-  Brightness4,
-  Brightness7,
+  Flare,
   ShoppingCart,
   KeyboardArrowDown,
   CategoryRounded,
   Person,
+  Brightness3,
 } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import DrawerItems from "../DrawerItems/DrawerItems";
@@ -175,7 +175,7 @@ function Header({
             <div className={classes.grow} />
             <Tooltip title="Switch to Dark/Light mode">
               <IconButton onClick={toggleTheme}>
-                {prefersDarkMode ? <Brightness7 /> : <Brightness4 />}
+                {prefersDarkMode ? <Flare /> : <Brightness3 />}
               </IconButton>
             </Tooltip>
             <Tooltip title="Cart Items">
