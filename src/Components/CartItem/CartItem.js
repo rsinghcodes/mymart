@@ -26,7 +26,7 @@ const CartItem = ({ item: { imageUrl, price, name, quantity } }) => {
             alignItems: "center",
           }}
         >
-          <p>Price: $ {price}</p>
+          <p>Price: ${price}</p>
           <p>Quantity: {quantity}</p>
         </div>
       </CardContent>

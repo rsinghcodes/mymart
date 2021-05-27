@@ -42,15 +42,13 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
                   {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Price: $ {price}
+                  Price: ${price}
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12} md={4} container direction="column" spacing={2}>
               <Grid item style={pricingGrid}>
-                <Typography variant="subtitle1">
-                  $ {price * quantity}
-                </Typography>
+                <Typography variant="subtitle1">${price * quantity}</Typography>
               </Grid>
 
               <Grid item style={pricingGrid}>

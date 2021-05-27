@@ -14,7 +14,6 @@ import {
   ExpandLess,
   ExpandMore,
   ExitToApp,
-  CheckCircle,
   ChevronLeft,
   ChevronRight,
   Category,
@@ -80,17 +79,6 @@ const DrawerItems = ({
             })}
           </List>
         </Collapse>
-        <ListItem
-          button
-          component={Link}
-          to="/sign-in"
-          onClick={() => setDrawerOpen(false)}
-        >
-          <ListItemIcon>
-            <CheckCircle />
-          </ListItemIcon>
-          <ListItemText primary="Your Orders" />
-        </ListItem>
         <ListItem
           button
           component={Link}

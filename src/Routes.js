@@ -25,12 +25,6 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
           }
         />
-        {/* <Route
-          path="/checkout"
-          render={() =>
-            currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
-          }
-        /> */}
         <Route exact path="/checkout" component={Checkoutpage} />
       </Suspense>
     </Switch>

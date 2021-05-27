@@ -4,9 +4,7 @@ import {
   Typography,
   Grid,
   Paper,
-  // Button,
   Box,
-  Button,
   Card,
   CardContent,
 } from "@material-ui/core";
@@ -20,10 +18,9 @@ import {
   selectCartTotal,
 } from "../../Redux/cart/cart.selectors";
 import PaymentButton from "../../Components/PaymentButton/PaymentButton";
-import { LockOutlined } from "@material-ui/icons";
 
 const Cartpage = ({ cartItems, total }) => {
-  const netTotal = total === 0 ? "0" : total > 100 ? total : total + 40;
+  const netTotal = total === 0 ? "0" : total > 50 ? total : total + 2;
   const classes = useStyles();
 
   return (
@@ -76,7 +73,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Shipping Cost:</p>
-            <p>$ {total > 100 ? "00" : "40"}</p>
+            <p>${total > 50 ? "00" : "2"}</p>
           </Grid>
 
           <Grid
@@ -86,7 +83,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Net Payable:</p>
-            <p>$ {netTotal}</p>
+            <p>${netTotal}</p>
           </Grid>
           <Divider />
           <Typography
@@ -94,18 +91,11 @@ const Cartpage = ({ cartItems, total }) => {
             component="p"
             style={{ marginTop: "12px" }}
           >
-            {total > 100
+            {total > 50
               ? "You are eligible for free delivery."
-              : "Shipping cost above $ 100 is free."}
+              : "Shipping cost above $50 is free."}
           </Typography>
-          {/* <Button
-            variant="contained"
-            color="primary"
-            startIcon={<LockOutlined />}
-            style={{ width: "100%", marginTop: "12px" }}
-            disableElevation
-          >
-          </Button> */}
+
           <div
             style={{ width: "100%", marginTop: "12px", textAlign: "center" }}
           >

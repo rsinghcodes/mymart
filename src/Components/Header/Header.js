@@ -155,7 +155,7 @@ function Header({
             component={Link}
             to="/sign-in"
           >
-            Sign Out
+            SIGN OUT
           </MenuItem>
         ) : (
           <MenuItem onClick={handleUserClose} component={Link} to="/sign-in">

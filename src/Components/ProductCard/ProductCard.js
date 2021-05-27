@@ -27,7 +27,7 @@ const ProductCard = ({ item, addItem, typeOfAction }) => {
           </Typography>
           <Divider style={{ margin: "0.7rem 0rem" }} />
           <Typography variant="body2" component="p">
-            Price: $ {price}
+            Price: ${price}
           </Typography>
         </CardContent>
 
