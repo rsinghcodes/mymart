@@ -26,7 +26,7 @@ export default function ResetPassword(props) {
     if ("email" in fieldValues)
       temp.email = /$^|.+@.+..+/.test(fieldValues.email)
         ? ""
-        : "Invalid Username!";
+        : "Invalid Email!";
     setErrors({
       ...temp,
     });

@@ -15,4 +15,33 @@
 - :ballot_box_with_check: Redux
 - :ballot_box_with_check: Firebase
 
-#### [Demo](https://mymartstore.netlify.app/)
+#### :file_folder: Get the Code
+
+```
+$ git clone https://github.com/rsinghcodes/mymart.git
+
+```
+
+```
+$ cd mymart
+
+```
+
+```
+$ npm install
+
+```
+
+```
+$ npm start
+
+```
+
+For production environments...
+
+```
+$ npm run build
+
+```
+
+#### [Live site](https://mymartstore.netlify.app/)
