@@ -42,8 +42,6 @@ function Header({
   itemCount,
   currentUser,
   categories,
-  history,
-  match,
 }) {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`);
   const classes = useStyles();
@@ -169,8 +167,8 @@ function Header({
   return (
     <>
       <div className={classes.grow}>
-        <AppBar position="fixed" elevation={0}>
-          <Toolbar className={classes.root}>
+        <AppBar position="fixed">
+          <Toolbar>
             <MainLogo to="/">mymart</MainLogo>
             <div className={classes.grow} />
             <Tooltip title="Switch to Dark/Light mode">

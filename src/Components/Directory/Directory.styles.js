@@ -6,7 +6,7 @@ export const DirectoryContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  @media (max-width: 800px) {
+  @media (max-width: 700px) {
     flex-direction: column;
   }
 `;
