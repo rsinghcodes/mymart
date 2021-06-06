@@ -25,7 +25,12 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
           }
         />
-        <Route exact path="/checkout" component={Checkoutpage} />
+        <Route
+          path="/checkout"
+          render={() =>
+            currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
+          }
+        />
       </Suspense>
     </Switch>
   );

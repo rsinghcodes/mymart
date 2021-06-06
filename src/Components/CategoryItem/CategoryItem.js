@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CategoryItem = ({ title, imageUrl, size, history, linkUrl, match }) => {
+const CategoryItem = ({ title, imageUrl, history, linkUrl, match }) => {
   const classes = useStyles();
   return (
     <>

@@ -12,12 +12,11 @@ const Homepage = () => {
       />
       <Divider />
       <Typography
-        variant="h5"
+        variant="h6"
         style={{
           marginTop: "20px",
           marginBottom: "15px",
           fontWeight: "bold",
-          textAlign: "center",
         }}
       >
         SHOP BY CATEGORY

@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Container, CssBaseline, makeStyles } from "@material-ui/core";
 import Theme from "./Components/Theme/Theme";
 import Header from "./Components/Header/Header";
-import Footer from "./Components/Footer/Footer";
 import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
@@ -16,6 +15,7 @@ import { selectCurrentUser } from "./Redux/user/user.selector";
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: theme.spacing(10),
+    marginBottom: theme.spacing(2),
   },
 }));
 
@@ -53,7 +53,7 @@ function App(props) {
               <Routes />
             </Container>
           </Router>
-          <Footer />
+
           <CssBaseline />
         </Theme>
       </ErrorBoundary>

@@ -24,6 +24,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import DrawerItems from "../DrawerItems/DrawerItems";
 import CartDrawer from "../Cart-Drawer/Cart-Drawer";
 import { Link } from "react-router-dom";
+import { withRouter } from "react-router";
 
 import { auth } from "../../Firebase/Firebase.utils";
 import { connect } from "react-redux";
@@ -42,6 +43,8 @@ function Header({
   itemCount,
   currentUser,
   categories,
+  history,
+  match,
 }) {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${theme})`);
   const classes = useStyles();
@@ -121,10 +124,11 @@ function Header({
         {categories.map((item, index) => (
           <MenuItem
             key={item.id}
-            component={Link}
-            to={item.linkUrl}
             selected={selectedIndex === index}
-            onClick={() => handleSelect(index)}
+            onClick={() => {
+              handleSelect(index);
+              history.push(`${match.url}${item.linkUrl}`);
+            }}
           >
             {item.title}
           </MenuItem>
@@ -167,7 +171,7 @@ function Header({
   return (
     <>
       <div className={classes.grow}>
-        <AppBar position="fixed">
+        <AppBar position="fixed" elevation={0}>
           <Toolbar>
             <MainLogo to="/">mymart</MainLogo>
             <div className={classes.grow} />
@@ -205,4 +209,4 @@ const mapStateToProps = createStructuredSelector({
   itemCount: selectCartItemsCount,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));
