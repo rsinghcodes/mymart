@@ -4,7 +4,7 @@ import { useMediaQuery } from "@material-ui/core";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectThemeMode } from "../../Redux/theme/theme.selector";
-import { grey } from "@material-ui/core/colors";
+import { grey, blueGrey } from "@material-ui/core/colors";
 
 const Theme = ({ children, themeMode }) => {
   const prefersDarkMode = useMediaQuery(`(prefers-color-scheme: ${themeMode})`);
@@ -23,14 +23,14 @@ const Theme = ({ children, themeMode }) => {
         primary: prefersDarkMode ? grey[50] : "#001833",
       },
       background: {
-        paper: prefersDarkMode ? grey[900] : grey[50],
-        default: prefersDarkMode ? grey[900] : grey[50],
+        paper: prefersDarkMode ? "#0d1117" : grey[50],
+        default: prefersDarkMode ? "#0d1117" : grey[50],
       },
     },
     overrides: {
       MuiAppBar: {
         colorPrimary: {
-          backgroundColor: prefersDarkMode ? "#333" : "#fff",
+          backgroundColor: prefersDarkMode ? blueGrey[900] : grey[50],
         },
       },
     },

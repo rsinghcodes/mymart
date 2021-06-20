@@ -20,19 +20,10 @@
 ```
 $ git clone https://github.com/rsinghcodes/mymart.git
 
-```
-
-```
 $ cd mymart
 
-```
-
-```
 $ npm install
 
-```
-
-```
 $ npm start
 
 ```

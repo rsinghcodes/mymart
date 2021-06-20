@@ -1,5 +1,4 @@
-import { makeStyles, styled, withTheme } from "@material-ui/core/styles";
-import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
 
 export default makeStyles((theme) => ({
   grow: {
@@ -17,11 +16,4 @@ export default makeStyles((theme) => ({
       display: "none",
     },
   },
-}));
-
-export const MainLogo = styled(withTheme(Link))((props) => ({
-  color: props.theme.palette.primary.main,
-  textDecoration: "none",
-  fontSize: "1.2rem",
-  fontWeight: "bold",
 }));

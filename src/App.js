@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, CssBaseline, makeStyles } from "@material-ui/core";
+import { CssBaseline } from "@material-ui/core";
 import Theme from "./Components/Theme/Theme";
 import Header from "./Components/Header/Header";
 import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
@@ -11,16 +11,9 @@ import { createStructuredSelector } from "reselect";
 import { auth, createUserProfileDocument } from "./Firebase/Firebase.utils";
 import { setCurrentUser } from "./Redux/user/user.actions";
 import { selectCurrentUser } from "./Redux/user/user.selector";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(10),
-    marginBottom: theme.spacing(2),
-  },
-}));
+import styled from "styled-components";
 
 function App(props) {
-  const classes = useStyles();
   const { setCurrentUser } = props;
 
   useEffect(() => {
@@ -49,9 +42,9 @@ function App(props) {
         <Theme>
           <Router>
             <Header />
-            <Container className={classes.root}>
+            <MainContainer>
               <Routes />
-            </Container>
+            </MainContainer>
           </Router>
 
           <CssBaseline />
@@ -70,3 +63,11 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+const MainContainer = styled.div`
+  margin: 5rem 1.8rem 0 1.5rem;
+
+  @media screen and (max-width: 700px) {
+    margin: 4rem 0.5rem 0 0.5rem;
+  }
+`;

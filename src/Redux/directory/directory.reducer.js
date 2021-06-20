@@ -8,8 +8,7 @@ const INITIAL_STATE = {
     },
     {
       title: "Atta, Dal & Pulses",
-      imageUrl:
-        "https://i.ibb.co/2M6KK1C/photo-1610725664285-7c57e6eeac3f-ixid-Mnwx-Mj-A3f-DB8-MHxz-ZWFy-Y2h8-MXx8-Zmxvd-XJ8-ZW58-MHx8-MHx8-i.jpg",
+      imageUrl: "https://i.ibb.co/nQ4gkgM/20190709035624-pulses-variety2-g.jpg",
       id: 2,
       linkUrl: "shop/staples",
     },

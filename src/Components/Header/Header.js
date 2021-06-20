@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import useStyles, { MainLogo } from "./Header.styles";
+import useStyles from "./Header.styles";
 import {
   SwipeableDrawer,
   Toolbar,
@@ -18,7 +18,7 @@ import {
   KeyboardArrowDown,
   CategoryRounded,
   Person,
-  Brightness3,
+  NightsStay,
 } from "@material-ui/icons";
 import MenuIcon from "@material-ui/icons/Menu";
 import DrawerItems from "../DrawerItems/DrawerItems";
@@ -51,11 +51,9 @@ function Header({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [anchorUserEl, setAnchorUserEl] = useState(null);
   const [categoryAnchorEL, setCategoryAnchorEL] = useState(null);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const handleCategoryOpen = (e) => setCategoryAnchorEL(e.currentTarget);
   const handleCategoryClose = () => setCategoryAnchorEL(null);
-  const handleSelect = (index) => {
-    setSelectedIndex(index);
+  const handleSelect = () => {
     handleCategoryClose();
   };
 
@@ -113,7 +111,7 @@ function Header({
         startIcon={<CategoryRounded />}
         endIcon={<KeyboardArrowDown />}
       >
-        {categories[selectedIndex].title || "Categories"}
+        Categories
       </Button>
       <Menu
         keepMounted
@@ -124,9 +122,8 @@ function Header({
         {categories.map((item, index) => (
           <MenuItem
             key={item.id}
-            selected={selectedIndex === index}
             onClick={() => {
-              handleSelect(index);
+              handleSelect();
               history.push(`${match.url}${item.linkUrl}`);
             }}
           >
@@ -171,13 +168,19 @@ function Header({
   return (
     <>
       <div className={classes.grow}>
-        <AppBar position="fixed" elevation={0}>
+        <AppBar position="fixed">
           <Toolbar>
-            <MainLogo to="/">mymart</MainLogo>
+            <Button
+              component={Link}
+              to="/"
+              style={{ fontSize: "1.2rem", fontWeight: "bold" }}
+            >
+              mymart
+            </Button>
             <div className={classes.grow} />
             <Tooltip title="Switch to Dark/Light mode">
               <IconButton onClick={toggleTheme}>
-                {prefersDarkMode ? <Flare /> : <Brightness3 />}
+                {prefersDarkMode ? <Flare /> : <NightsStay />}
               </IconButton>
             </Tooltip>
             <Tooltip title="Cart Items">
