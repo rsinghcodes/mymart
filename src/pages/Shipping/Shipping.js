@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Grid,
   Typography,
-  FormControl,
-  InputLabel,
-  Select,
-  MenuItem,
+  // FormControl,
+  // InputLabel,
+  // Select,
+  // MenuItem,
 } from "@material-ui/core";
 import styled from "styled-components";
 import Input from "../../Components/controls/Input";
 import { useForm, Form } from "../../Components/Form/useForm";
 import { ArrowBackIos, Https } from "@material-ui/icons";
+
+import {
+  PaymentRequestButtonElement,
+  useStripe,
+} from "@stripe/react-stripe-js";
 
 const initialFValues = {
   displayName: "",
@@ -23,6 +28,9 @@ const initialFValues = {
 };
 
 const Shipping = () => {
+  const stripe = useStripe();
+  const [paymentRequest, setPaymentRequest] = useState(null);
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("displayName" in fieldValues)
@@ -66,9 +74,33 @@ const Shipping = () => {
     // const { displayName, phone, address, pincode, state, city } = values;
     event.preventDefault();
     if (validate()) {
+      if (stripe) {
+        const pr = stripe.paymentRequest({
+          country: "US",
+          currency: "usd",
+          total: {
+            label: "Demo total",
+            amount: 6,
+          },
+          requestPayerName: true,
+          requestPayerEmail: true,
+        });
+
+        // Check the availability of the Payment Request API.
+        pr.canMakePayment().then((result) => {
+          if (result) {
+            setPaymentRequest(pr);
+          }
+        });
+      }
       resetForm();
     }
   };
+
+  if (paymentRequest) {
+    return <PaymentRequestButtonElement options={{ paymentRequest }} />;
+  }
+
   return (
     <Form onSubmit={handleSubmit}>
       <Grid container justify="center" alignItems="center">
@@ -97,7 +129,21 @@ const Shipping = () => {
             onChange={handleInputChange}
             error={errors.address}
           />
-          <FormControl
+          <Input
+            label="State"
+            name="state"
+            value={values.state}
+            onChange={handleInputChange}
+            error={errors.state}
+          />
+          <Input
+            label="City"
+            name="city"
+            value={values.city}
+            onChange={handleInputChange}
+            error={errors.city}
+          />
+          {/* <FormControl
             variant="outlined"
             style={{ width: "100%", marginBottom: "20px" }}
           >
@@ -132,7 +178,7 @@ const Shipping = () => {
               <MenuItem value="Arunachal Pradesh">Chittoor</MenuItem>
               <MenuItem value="Assam">East Godavari</MenuItem>
             </Select>
-          </FormControl>
+          </FormControl> */}
           <Input
             label="Pin Code"
             name="pincode"
