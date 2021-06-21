@@ -5,8 +5,7 @@ import {
   Grid,
   Paper,
   Box,
-  Card,
-  CardContent,
+  Button,
 } from "@material-ui/core";
 import useStyles from "./Checkoutpage.styles";
 import CheckoutItem from "../../Components/Checkout-Item/Checkout-Item";
@@ -17,10 +16,10 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../Redux/cart/cart.selectors";
-import PaymentButton from "../../Components/PaymentButton/PaymentButton";
+import { Link } from "react-router-dom";
 
 const Cartpage = ({ cartItems, total }) => {
-  const netTotal = total === 0 ? "0" : total > 50 ? total : total + 2;
+  const netTotal = total === 0 ? "0" : total > 10 ? total : total + 2;
   const classes = useStyles();
 
   return (
@@ -64,7 +63,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Items Total:</p>
-            <p>$ {total}</p>
+            <p>${total}</p>
           </Grid>
           <Grid
             container
@@ -73,7 +72,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Shipping Cost:</p>
-            <p>${total > 50 ? "00" : "2"}</p>
+            <p>${total > 10 ? "00" : "2"}</p>
           </Grid>
 
           <Grid
@@ -91,25 +90,20 @@ const Cartpage = ({ cartItems, total }) => {
             component="p"
             style={{ marginTop: "12px" }}
           >
-            {total > 50
+            {total > 10
               ? "You are eligible for free delivery."
-              : "Shipping cost above $50 is free."}
+              : "Shipping cost above $10 is free."}
           </Typography>
-
-          <div
-            style={{ width: "100%", marginTop: "12px", textAlign: "center" }}
+          <Button
+            variant="contained"
+            color="primary"
+            disableElevation
+            component={Link}
+            to="/checkout/shipping"
+            style={{ width: "100%", margin: "12px 0" }}
           >
-            <PaymentButton price={netTotal} />
-          </div>
-          <Card>
-            <CardContent>
-              <Typography variant="body2">
-                Card Number: 4242 4242 4242 4242
-              </Typography>
-              <Typography variant="body2">Expiry: 01/22</Typography>
-              <Typography variant="body2">CVV: 123</Typography>
-            </CardContent>
-          </Card>
+            Continue to Shipping
+          </Button>
         </Paper>
       </Grid>
     </Box>

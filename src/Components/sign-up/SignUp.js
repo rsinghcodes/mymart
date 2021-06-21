@@ -22,15 +22,17 @@ const SignUp = () => {
         ? ""
         : "This field is required.";
     if ("email" in fieldValues)
-      temp.email = /$^|.+@.+..+/.test(fieldValues.email)
-        ? ""
-        : "Email is not valid.";
+      temp.email = fieldValues.email
+        ? /$^|.+@.+..+/.test(fieldValues.email)
+          ? ""
+          : "Email is not valid."
+        : "This field is required.";
     if ("password" in fieldValues)
-      temp.password = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(
-        fieldValues.password
-      )
-        ? ""
-        : "Minimum six characters, at least one letter and one number.";
+      temp.password = fieldValues.password
+        ? /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(fieldValues.password)
+          ? ""
+          : "Minimum six characters, at least one letter and one number."
+        : "This field is required.";
     if ("confirmPassword" in fieldValues)
       temp.confirmPassword =
         fieldValues.confirmPassword === values.password

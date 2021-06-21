@@ -180,7 +180,7 @@ function Header({
             <div className={classes.grow} />
             <Tooltip title="Switch to Dark/Light mode">
               <IconButton onClick={toggleTheme}>
-                {prefersDarkMode ? <Flare /> : <NightsStay />}
+                {prefersDarkMode ? <NightsStay /> : <Flare />}
               </IconButton>
             </Tooltip>
             <Tooltip title="Cart Items">
