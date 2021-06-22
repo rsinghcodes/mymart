@@ -12,7 +12,6 @@ const SignInAndSignUpPage = lazy(() =>
 );
 const Shop = lazy(() => import("./pages/shop/Shop"));
 const Checkoutpage = lazy(() => import("./pages/Checkout-page/Checkoutpage"));
-const Shipping = lazy(() => import("./pages/Shipping/Shipping"));
 
 const Routes = ({ currentUser }) => {
   return (
@@ -32,8 +31,7 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
           }
         /> */}
-        <Route path="/checkout" exact component={Checkoutpage} />
-        <Route path="/checkout/shipping" component={Shipping} />
+        <Route path="/checkout" component={Checkoutpage} />
       </Suspense>
     </Switch>
   );

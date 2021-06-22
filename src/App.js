@@ -7,8 +7,6 @@ import Routes from "./Routes";
 import { BrowserRouter as Router } from "react-router-dom";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
 import { auth, createUserProfileDocument } from "./Firebase/Firebase.utils";
 import { setCurrentUser } from "./Redux/user/user.actions";
@@ -17,13 +15,6 @@ import styled from "styled-components";
 
 function App(props) {
   const { setCurrentUser } = props;
-
-  const stripePromise = loadStripe(
-    "pk_test_51Iuu7DSBKEWWbULuYxoseXprsvNtKa73mQa7eXfACYFEHdWm4EMoFazNt0VX2UYQChLWr99O2sRHRSXeKNfrLgE900EE1lIP1q",
-    {
-      stripeAccount: "{{CONNECTED_STRIPE_ACCOUNT_ID}}",
-    }
-  );
 
   useEffect(() => {
     const unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -52,9 +43,7 @@ function App(props) {
           <Router>
             <Header />
             <MainContainer>
-              <Elements stripe={stripePromise}>
-                <Routes />
-              </Elements>
+              <Routes />
             </MainContainer>
           </Router>
 

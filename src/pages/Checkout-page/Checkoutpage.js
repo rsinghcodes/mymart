@@ -1,14 +1,8 @@
 import React from "react";
-import {
-  Divider,
-  Typography,
-  Grid,
-  Paper,
-  Box,
-  Button,
-} from "@material-ui/core";
+import { Divider, Typography, Grid, Paper, Box } from "@material-ui/core";
 import useStyles from "./Checkoutpage.styles";
 import CheckoutItem from "../../Components/Checkout-Item/Checkout-Item";
+import PaymentButton from "../../Components/PaymentButton/PaymentButton";
 
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
@@ -16,7 +10,7 @@ import {
   selectCartItems,
   selectCartTotal,
 } from "../../Redux/cart/cart.selectors";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Cartpage = ({ cartItems, total }) => {
   const netTotal = total === 0 ? "0" : total > 10 ? total : total + 2;
@@ -94,16 +88,9 @@ const Cartpage = ({ cartItems, total }) => {
               ? "You are eligible for free delivery."
               : "Shipping cost above $10 is free."}
           </Typography>
-          <Button
-            variant="contained"
-            color="primary"
-            disableElevation
-            component={Link}
-            to="/checkout/shipping"
-            style={{ width: "100%", margin: "12px 0" }}
-          >
-            Continue to Shipping
-          </Button>
+          <PaymentDiv>
+            <PaymentButton price={netTotal} />
+          </PaymentDiv>
         </Paper>
       </Grid>
     </Box>
@@ -116,3 +103,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default connect(mapStateToProps)(Cartpage);
+
+const PaymentDiv = styled.div`
+  margin: 12px 0;
+  text-align: center;
+`;
