@@ -1,10 +1,9 @@
 ### My Mart - An online mini mart store.
 
-<img src="https://user-images.githubusercontent.com/67682451/122913970-c3887100-d377-11eb-8252-097b1cd501df.png" alt="app-preview" width="100%">
-<img src="https://user-images.githubusercontent.com/67682451/122914349-2e39ac80-d378-11eb-9182-fed4d0394264.png" alt="app-preview" width="auto">
+---
 
-</br>
-</br>
+<img src="https://user-images.githubusercontent.com/67682451/123089868-209e2880-d445-11eb-81f3-029793098613.png" alt="app-preview" width="100%">
+
 </br>
 
 #### :telescope: Overview <br/>
@@ -23,19 +22,19 @@
 
 **React & Redux:**
 
-Use Redux for state management. <br/>
-Routing with **React Router.**<br/>
-Redux Thunk for asynchronous actions like bringing Data from Firestore to the App.<br/>
-Redux Persist.<br/>
+- Use Redux for state management. <br/>
+- Routing with **React Router.**<br/>
+- Redux Thunk for asynchronous actions like bringing Data from Firestore to the App.<br/>
+- Redux Persist.<br/>
 
 </br>
 
 **Firebase & Firestore**
 
-Use Firebase to build full stack application.<br/>
-Sign-In workflow with Firebase.<br/>
-Google Sign-in Authentification.<br/>
-Storing User Data In Firebase.<br/>
+- Use Firebase to build full stack application.<br/>
+- Sign-In workflow with Firebase.<br/>
+- Google Sign-in Authentification.<br/>
+- Storing User Data In Firebase.<br/>
 
 #### :file_folder: Get the Code
 

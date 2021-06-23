@@ -25,13 +25,12 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
           }
         />
-        {/* <Route
+        <Route
           path="/checkout"
           render={() =>
             currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
           }
-        /> */}
-        <Route path="/checkout" component={Checkoutpage} />
+        />
       </Suspense>
     </Switch>
   );
