@@ -53,7 +53,7 @@ const Cartpage = ({ cartItems, total }) => {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="center"
           >
             <p>Items Total:</p>
@@ -62,7 +62,7 @@ const Cartpage = ({ cartItems, total }) => {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="center"
           >
             <p>Shipping Cost:</p>
@@ -72,7 +72,7 @@ const Cartpage = ({ cartItems, total }) => {
           <Grid
             container
             direction="row"
-            justify="space-between"
+            justifyContent="space-between"
             alignItems="center"
           >
             <p>Net Payable:</p>

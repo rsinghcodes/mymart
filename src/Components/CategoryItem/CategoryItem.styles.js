@@ -67,12 +67,12 @@ export const GoCorner = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 42px;
+  height: 42px;
   overflow: hidden;
   top: 0;
   right: 0;
-  background-color: #00838d;
+  background-color: #0072e5;
   border-radius: 0 4px 0 32px;
 `;
 
