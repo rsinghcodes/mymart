@@ -34,8 +34,6 @@ const Theme = ({ children, themeMode }) => {
     },
   });
 
-  console.log(theme);
-
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
