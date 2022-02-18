@@ -1,24 +1,24 @@
-import React, { lazy, Suspense } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Spinner from "./Components/Spinner/Spinner";
+import React, { lazy, Suspense } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Spinner from './Components/Spinner/Spinner';
 
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "./Redux/user/user.selector";
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { selectCurrentUser } from './Redux/user/user.selector';
 
-const Homepage = lazy(() => import("./pages/Homepage/Homepage"));
-const SignInAndSignUpPage = lazy(() =>
-  import("./pages/sign-in-and-sign-up/sign-in-and-sign-up")
-);
-const Shop = lazy(() => import("./pages/shop/Shop"));
-const Checkoutpage = lazy(() => import("./pages/Checkout-page/Checkoutpage"));
+const Homepage = lazy(() => import('./pages/Homepage'));
+const SignInAndSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up'));
+const Shop = lazy(() => import('./pages/shop'));
+const Checkoutpage = lazy(() => import('./pages/Checkout-page'));
+const OrdersPage = lazy(() => import('./pages/orders'));
+const NotFound = lazy(() => import('./pages/404'));
 
 const Routes = ({ currentUser }) => {
   return (
     <Switch>
       <Suspense fallback={<Spinner />}>
         <Route exact path="/" component={Homepage} />
-        <Route path="/shop" component={Shop} />
+        <Route exact path="/shop" component={Shop} />
         <Route
           path="/sign-in"
           render={() =>
@@ -31,6 +31,8 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
           }
         />
+        <Route exact path="/orders" component={OrdersPage} />
+        <Route component={NotFound} />
       </Suspense>
     </Switch>
   );

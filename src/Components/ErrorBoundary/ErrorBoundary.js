@@ -1,9 +1,9 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   ErrorImageContainer,
   ErrorImageOverlay,
   ErrorImageText,
-} from "./ErrorBoundary.styles";
+} from './ErrorBoundary.styles';
 
 export class ErrorBoundary extends Component {
   constructor() {
@@ -28,7 +28,7 @@ export class ErrorBoundary extends Component {
       return (
         <ErrorImageOverlay>
           <ErrorImageContainer imageUrl="https://i.imgur.com/Q2BAOd2.png" />
-          <ErrorImageText>Sorry, this page is Not on the map</ErrorImageText>
+          <ErrorImageText>Sorry, this page is not on the map</ErrorImageText>
         </ErrorImageOverlay>
       );
     }
