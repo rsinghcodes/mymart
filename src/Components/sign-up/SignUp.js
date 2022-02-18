@@ -1,61 +1,43 @@
-import React from "react";
-import { Button, Grid, Typography } from "@material-ui/core";
-import Input from "../../Components/controls/Input";
-import { useForm, Form } from "../Form/useForm";
-import useStyles from "./Signup.styles";
+import React from 'react';
+import * as Yup from 'yup';
+import { Button, Grid, Typography } from '@material-ui/core';
+import { useFormik, Form, FormikProvider } from 'formik';
 
-import { auth, createUserProfileDocument } from "../../Firebase/Firebase.utils";
-
-const initialFValues = {
-  displayName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-};
+import Input from '../../Components/controls/Input';
+import useStyles from './Signup.styles';
+import { auth, createUserProfileDocument } from '../../Firebase/Firebase.utils';
 
 const SignUp = () => {
   const classes = useStyles();
-  const validate = (fieldValues = values) => {
-    let temp = { ...errors };
-    if ("displayName" in fieldValues)
-      temp.displayName = fieldValues.displayName
-        ? ""
-        : "This field is required.";
-    if ("email" in fieldValues)
-      temp.email = fieldValues.email
-        ? /$^|.+@.+..+/.test(fieldValues.email)
-          ? ""
-          : "Email is not valid."
-        : "This field is required.";
-    if ("password" in fieldValues)
-      temp.password = fieldValues.password
-        ? /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/.test(fieldValues.password)
-          ? ""
-          : "Minimum six characters, at least one letter and one number."
-        : "This field is required.";
-    if ("confirmPassword" in fieldValues)
-      temp.confirmPassword =
-        fieldValues.confirmPassword === values.password
-          ? ""
-          : "Password didn't matched!";
-    setErrors({
-      ...temp,
-    });
+  const RegisterSchema = Yup.object().shape({
+    displayName: Yup.string()
+      .min(2, 'Fullname is too Short!')
+      .max(50, 'Fullname is too Long!')
+      .required('Fullname field is required'),
+    email: Yup.string()
+      .email('Email is not valid')
+      .required('Email field is required'),
+    password: Yup.string()
+      .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+        'Minimum six characters, at least one letter and one number'
+      )
+      .required('Password field is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], "Password didn't matched!")
+      .required('Please Re-Enter Password'),
+  });
 
-    if (fieldValues === values)
-      return Object.values(temp).every((x) => x === "");
-  };
-
-  const { values, errors, setErrors, handleInputChange, resetForm } = useForm(
-    initialFValues,
-    true,
-    validate
-  );
-
-  const handleSubmit = async (event) => {
-    const { displayName, email, password } = values;
-    event.preventDefault();
-    if (validate()) {
+  const formik = useFormik({
+    initialValues: {
+      displayName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: RegisterSchema,
+    onSubmit: async () => {
+      const { displayName, email, password } = values;
       try {
         const { user } = await auth.createUserWithEmailAndPassword(
           email,
@@ -65,59 +47,64 @@ const SignUp = () => {
       } catch (error) {
         alert(error.message);
       }
-      resetForm();
-    }
-  };
+    },
+  });
+
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Grid container justify="center" alignItems="center">
-        <Grid item xs={11} lg={9} className={classes.item}>
-          <Typography variant="h6" style={{ marginBottom: "20px" }}>
-            Create a new account
-          </Typography>
-          <Input
-            label="Full Name"
-            name="displayName"
-            value={values.displayName}
-            onChange={handleInputChange}
-            error={errors.displayName}
-          />
-          <Input
-            label="Email"
-            name="email"
-            value={values.email}
-            onChange={handleInputChange}
-            error={errors.email}
-          />
-          <Input
-            label="Password"
-            name="password"
-            type="password"
-            value={values.password}
-            onChange={handleInputChange}
-            error={errors.password}
-          />
-          <Input
-            label="Confirm Password"
-            name="confirmPassword"
-            type="password"
-            value={values.confirmPassword}
-            onChange={handleInputChange}
-            error={errors.confirmPassword}
-          />
+    <FormikProvider value={formik}>
+      <Form
+        autoComplete="off"
+        noValidate
+        onSubmit={handleSubmit}
+        style={{ width: '100%' }}
+      >
+        <Grid container justifyContent="center" alignItems="center">
+          <Grid item xs={11} lg={9} className={classes.item}>
+            <Typography variant="h6" style={{ marginBottom: '20px' }}>
+              Create a new account
+            </Typography>
+            <Input
+              label="Full Name"
+              name="displayName"
+              value={values.displayName}
+              {...getFieldProps('displayName')}
+              error={touched.displayName && errors.displayName}
+            />
+            <Input
+              label="Email"
+              name="email"
+              {...getFieldProps('email')}
+              error={touched.email && errors.email}
+            />
+            <Input
+              label="Password"
+              name="password"
+              type="password"
+              {...getFieldProps('password')}
+              error={touched.password && errors.password}
+            />
+            <Input
+              label="Confirm Password"
+              name="confirmPassword"
+              type="password"
+              {...getFieldProps('confirmPassword')}
+              error={touched.confirmPassword && errors.confirmPassword}
+            />
 
-          <Button
-            variant="contained"
-            color="primary"
-            type="submit"
-            disableElevation
-          >
-            Sign Up
-          </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              disableElevation
+            >
+              Sign Up
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
-    </Form>
+      </Form>
+    </FormikProvider>
   );
 };
 
