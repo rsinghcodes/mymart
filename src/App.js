@@ -1,17 +1,17 @@
-import React, { useEffect } from "react";
-import { CssBaseline } from "@material-ui/core";
-import Theme from "./Components/Theme/Theme";
-import Header from "./Components/Header/Header";
-import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
-import Routes from "./Routes";
-import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import React, { useEffect } from 'react';
+import { CssBaseline } from '@material-ui/core';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import styled from 'styled-components';
 
-import { auth, createUserProfileDocument } from "./Firebase/Firebase.utils";
-import { setCurrentUser } from "./Redux/user/user.actions";
-import { selectCurrentUser } from "./Redux/user/user.selector";
-import styled from "styled-components";
+import Routes from './Routes';
+import Theme from './Components/Theme/Theme';
+import Header from './Components/Header/Header';
+import ErrorBoundary from './Components/ErrorBoundary/ErrorBoundary';
+import { auth, createUserProfileDocument } from './Firebase/Firebase.utils';
+import { setCurrentUser } from './Redux/user/user.actions';
+import { selectCurrentUser } from './Redux/user/user.selector';
 
 function App(props) {
   const { setCurrentUser } = props;

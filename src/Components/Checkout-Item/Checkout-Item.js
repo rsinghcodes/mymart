@@ -1,7 +1,7 @@
-import React from "react";
-import useStyles, { pricingGrid } from "./Checkout-Item.styles";
-import AddIcon from "@material-ui/icons/Add";
-import RemoveIcon from "@material-ui/icons/Remove";
+import React from 'react';
+import useStyles, { pricingGrid } from './Checkout-Item.styles';
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
 import {
   Typography,
   Paper,
@@ -9,13 +9,13 @@ import {
   ButtonGroup,
   Button,
   Grid,
-} from "@material-ui/core";
-import { connect } from "react-redux";
+} from '@material-ui/core';
+import { connect } from 'react-redux';
 import {
   clearItemFromCart,
   addItem,
   removeItem,
-} from "../../Redux/cart/cart.actions";
+} from '../../Redux/cart/cart.actions';
 
 const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
   const { name, imageUrl, price, quantity } = cartItem;
@@ -34,7 +34,7 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
             xs={12}
             sm
             container
-            style={{ justifyContent: "space-between" }}
+            style={{ justifyContent: 'space-between' }}
           >
             <Grid item xs={12} md={8} container direction="column" spacing={2}>
               <Grid item xs>
@@ -42,13 +42,15 @@ const CheckoutItem = ({ cartItem, clearItem, addItem, removeItem }) => {
                   {name}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Price: ${price}
+                  Price: ${price} per Item
                 </Typography>
               </Grid>
             </Grid>
             <Grid item xs={12} md={4} container direction="column" spacing={2}>
               <Grid item style={pricingGrid}>
-                <Typography variant="subtitle1">${price * quantity}</Typography>
+                <Typography variant="subtitle1">
+                  Price: ${price * quantity}
+                </Typography>
               </Grid>
 
               <Grid item style={pricingGrid}>

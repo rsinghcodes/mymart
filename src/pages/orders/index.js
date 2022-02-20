@@ -19,7 +19,7 @@ const OrdersPage = () => {
         </Typography>
         <Divider />
         <OrderContainer>
-          <p>Looks like you haven't ordered yet!</p>
+          <p>Looks like you haven't ordered anything yet!</p>
         </OrderContainer>
       </Grid>
     </Box>

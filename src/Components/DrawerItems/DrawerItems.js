@@ -8,8 +8,8 @@ import {
   ListItemText,
   useTheme,
   Chip,
-} from "@material-ui/core";
-import React from "react";
+} from '@material-ui/core';
+import React from 'react';
 import {
   ExpandLess,
   ExpandMore,
@@ -20,10 +20,11 @@ import {
   Person,
   LocalMall,
   Security,
-} from "@material-ui/icons";
+  LocalShipping,
+} from '@material-ui/icons';
 
-import useStyles from "./Drawer.styles";
-import { Link } from "react-router-dom";
+import useStyles from './Drawer.styles';
+import { Link } from 'react-router-dom';
 
 const DrawerItems = ({
   setDrawerOpen,
@@ -44,12 +45,12 @@ const DrawerItems = ({
     <>
       <div className={classes.drawerHeader}>
         <IconButton onClick={() => setDrawerOpen(false)}>
-          {theme.direction === "rtl" ? <ChevronLeft /> : <ChevronRight />}
+          {theme.direction === 'rtl' ? <ChevronLeft /> : <ChevronRight />}
         </IconButton>
         <Chip
           icon={<Person />}
           color="primary"
-          label={currentUser ? currentUser.displayName : "Guest User"}
+          label={currentUser ? currentUser.displayName : 'Guest User'}
         />
       </div>
       <Divider />
@@ -89,6 +90,17 @@ const DrawerItems = ({
             <LocalMall />
           </ListItemIcon>
           <ListItemText primary="Shop" />
+        </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to="/orders"
+          onClick={() => setDrawerOpen(false)}
+        >
+          <ListItemIcon>
+            <LocalShipping />
+          </ListItemIcon>
+          <ListItemText primary="Orders" />
         </ListItem>
         {currentUser ? (
           <ListItem button onClick={handleSignoutbtn}>

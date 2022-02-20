@@ -11,7 +11,6 @@ const SignInAndSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up'));
 const Shop = lazy(() => import('./pages/shop'));
 const Checkoutpage = lazy(() => import('./pages/Checkout-page'));
 const OrdersPage = lazy(() => import('./pages/orders'));
-const NotFound = lazy(() => import('./pages/404'));
 
 const Routes = ({ currentUser }) => {
   return (
@@ -31,8 +30,12 @@ const Routes = ({ currentUser }) => {
             currentUser ? <Checkoutpage /> : <SignInAndSignUpPage />
           }
         />
-        <Route exact path="/orders" component={OrdersPage} />
-        <Route component={NotFound} />
+        <Route
+          path="/orders"
+          render={() =>
+            currentUser ? <OrdersPage /> : <SignInAndSignUpPage />
+          }
+        />
       </Suspense>
     </Switch>
   );

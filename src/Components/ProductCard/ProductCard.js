@@ -1,5 +1,5 @@
-import React from "react";
-import useStyles from "./ProductCard.styles";
+import React from 'react';
+import useStyles from './ProductCard.styles';
 import {
   Button,
   Typography,
@@ -8,12 +8,12 @@ import {
   CardActions,
   Card,
   Divider,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import { connect } from "react-redux";
-import { addItem } from "../../Redux/cart/cart.actions";
+import { connect } from 'react-redux';
+import { addItem } from '../../Redux/cart/cart.actions';
 
-const ProductCard = ({ item, addItem, typeOfAction }) => {
+const ProductCard = ({ item, addItem }) => {
   const classes = useStyles();
   const { name, price, imageUrl } = item;
 
@@ -25,7 +25,7 @@ const ProductCard = ({ item, addItem, typeOfAction }) => {
           <Typography variant="body2" component="p">
             {name}
           </Typography>
-          <Divider style={{ margin: "0.7rem 0rem" }} />
+          <Divider style={{ margin: '0.7rem 0rem' }} />
           <Typography variant="body2" component="p">
             Price: ${price}
           </Typography>
@@ -36,7 +36,7 @@ const ProductCard = ({ item, addItem, typeOfAction }) => {
             variant="contained"
             color="primary"
             disableElevation
-            style={{ width: "100%" }}
+            style={{ width: '100%' }}
             onClick={() => addItem(item)}
           >
             Add to cart

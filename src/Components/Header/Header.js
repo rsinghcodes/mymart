@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import useStyles from "./Header.styles";
+import React, { useState } from 'react';
+import useStyles from './Header.styles';
 import {
   SwipeableDrawer,
   Toolbar,
@@ -11,7 +11,7 @@ import {
   Button,
   MenuItem,
   Menu,
-} from "@material-ui/core";
+} from '@material-ui/core';
 import {
   Flare,
   ShoppingCart,
@@ -19,22 +19,22 @@ import {
   CategoryRounded,
   Person,
   NightsStay,
-} from "@material-ui/icons";
-import MenuIcon from "@material-ui/icons/Menu";
-import DrawerItems from "../DrawerItems/DrawerItems";
-import CartDrawer from "../Cart-Drawer/Cart-Drawer";
-import { Link } from "react-router-dom";
-import { withRouter } from "react-router";
+} from '@material-ui/icons';
+import MenuIcon from '@material-ui/icons/Menu';
+import DrawerItems from '../DrawerItems/DrawerItems';
+import CartDrawer from '../Cart-Drawer/Cart-Drawer';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
-import { auth } from "../../Firebase/Firebase.utils";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { toggleTheme } from "../../Redux/theme/theme.action";
-import { selectThemeMode } from "../../Redux/theme/theme.selector";
-import { selectCartItemsCount } from "../../Redux/cart/cart.selectors";
-import { selectCurrentUser } from "../../Redux/user/user.selector";
-import { selectDirectorySections } from "../../Redux/directory/directory.selectors";
-import { toggleCartOpen } from "../../Redux/cart/cart.actions";
+import { auth } from '../../Firebase/Firebase.utils';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { toggleTheme } from '../../Redux/theme/theme.action';
+import { selectThemeMode } from '../../Redux/theme/theme.selector';
+import { selectCartItemsCount } from '../../Redux/cart/cart.selectors';
+import { selectCurrentUser } from '../../Redux/user/user.selector';
+import { selectDirectorySections } from '../../Redux/directory/directory.selectors';
+import { toggleCartOpen } from '../../Redux/cart/cart.actions';
 
 function Header({
   toggleTheme,
@@ -106,6 +106,9 @@ function Header({
       <Button component={Link} to="/shop">
         Shop
       </Button>
+      <Button component={Link} to="/orders">
+        Orders
+      </Button>
       <Button
         onClick={handleCategoryOpen}
         startIcon={<CategoryRounded />}
@@ -137,7 +140,7 @@ function Header({
         startIcon={<Person />}
         endIcon={<KeyboardArrowDown />}
       >
-        {currentUser ? currentUser.displayName : "Guest User"}
+        {currentUser ? currentUser.displayName : 'Guest User'}
       </Button>
       <Menu
         keepMounted
@@ -173,7 +176,7 @@ function Header({
             <Button
               component={Link}
               to="/"
-              style={{ fontSize: "1.2rem", fontWeight: "bold" }}
+              style={{ fontSize: '1.2rem', fontWeight: 'bold' }}
             >
               mymart
             </Button>
