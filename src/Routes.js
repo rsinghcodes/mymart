@@ -9,6 +9,7 @@ import { selectCurrentUser } from './Redux/user/user.selector';
 const Homepage = lazy(() => import('./pages/Homepage'));
 const SignInAndSignUpPage = lazy(() => import('./pages/sign-in-and-sign-up'));
 const Shop = lazy(() => import('./pages/shop'));
+const CollectionPageContainer = lazy(() => import('./pages/collection/collection.container'));
 const Checkoutpage = lazy(() => import('./pages/Checkout-page'));
 const OrdersPage = lazy(() => import('./pages/orders'));
 
@@ -18,6 +19,10 @@ const Routes = ({ currentUser }) => {
       <Suspense fallback={<Spinner />}>
         <Route exact path="/" component={Homepage} />
         <Route exact path="/shop" component={Shop} />
+        <Route
+          path={`/shop/:collectionId`}
+          component={CollectionPageContainer}
+        />
         <Route
           path="/sign-in"
           render={() =>

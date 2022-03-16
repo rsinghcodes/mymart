@@ -9,9 +9,6 @@ import { fetchCollectionsStartAsync } from "../../Redux/shop/shop.actions";
 const CollectionsOverviewContainer = lazy(() =>
   import("../../Components/collections-overview/collections-overview.container")
 );
-const CollectionPageContainer = lazy(() =>
-  import("../collection/collection.container")
-);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,10 +30,6 @@ function Shop({ fetchCollectionsStartAsync, match }) {
           exact
           path={`${match.path}`}
           component={CollectionsOverviewContainer}
-        />
-        <Route
-          path={`${match.path}/:collectionId`}
-          component={CollectionPageContainer}
         />
       </Suspense>
     </Container>
