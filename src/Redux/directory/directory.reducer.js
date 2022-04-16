@@ -1,13 +1,13 @@
 const INITIAL_STATE = {
   categories: [
     {
-      title: "Food & Snacks",
+      title: "Cookies & Snacks",
       imageUrl: "https://i.ibb.co/M59yT7B/dairy-And-Bakery.jpg",
       id: 1,
       linkUrl: "shop/food-and-snacks",
     },
     {
-      title: "Atta, Dal & Pulses",
+      title: "Daily Groceries (Flour & Pulses)",
       imageUrl: "https://i.ibb.co/nQ4gkgM/20190709035624-pulses-variety2-g.jpg",
       id: 2,
       linkUrl: "shop/staples",

@@ -13,7 +13,7 @@ import {
 import styled from "styled-components";
 
 const Cartpage = ({ cartItems, total }) => {
-  const netTotal = total === 0 ? "0" : total > 10 ? total : total + 2;
+  const netTotal = total === 0 ? "0" : total >= 500 ? total : total + 50;
   const classes = useStyles();
 
   return (
@@ -57,7 +57,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Items Total:</p>
-            <p>${total}</p>
+            <p>₹{total}</p>
           </Grid>
           <Grid
             container
@@ -66,7 +66,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Shipping Cost:</p>
-            <p>${total > 10 ? "00" : "2"}</p>
+            <p>₹{total >= 500 ? "00" : "50"}</p>
           </Grid>
 
           <Grid
@@ -76,7 +76,7 @@ const Cartpage = ({ cartItems, total }) => {
             alignItems="center"
           >
             <p>Net Payable:</p>
-            <p>${netTotal}</p>
+            <p>₹{netTotal}</p>
           </Grid>
           <Divider />
           <Typography
@@ -84,9 +84,9 @@ const Cartpage = ({ cartItems, total }) => {
             component="p"
             style={{ marginTop: "12px" }}
           >
-            {total > 10
+            {total >= 500
               ? "You are eligible for free delivery."
-              : "Shipping cost above $10 is free."}
+              : "Shipping cost above ₹500 is free."}
           </Typography>
           <PaymentDiv>
             <PaymentButton price={netTotal} />
